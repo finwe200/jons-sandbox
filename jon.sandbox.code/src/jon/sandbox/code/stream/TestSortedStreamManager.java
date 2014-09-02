@@ -1,10 +1,13 @@
-package jon.sandbox.code.streams;
+package jon.sandbox.code.stream;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import jon.sandbox.code.basic.ComparableComparator;
+import jon.sandbox.code.basic.Fruit;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -92,7 +95,8 @@ public class TestSortedStreamManager
       for (Integer i : expected)
       {
         assertEquals(true, mgr.hasNext());
-        assertEquals(0, i.compareTo((Integer)mgr.next()));
+        //assertEquals(0, i.compareTo((Integer)mgr.next()));
+        assertEquals(true, isEqual(mgr.next(), i));
 
       }
       assertEquals(false, mgr.hasNext());
@@ -100,13 +104,13 @@ public class TestSortedStreamManager
 
     {
       SortedArrayStream<Fruit> s1 = null;
-      SortedArrayStream<Fruit> s2 =
-        new SortedArrayStream<Fruit>(new Fruit[]{new Fruit("Watermelon"), new Fruit("Apple")});
+      SortedArrayStream<Fruit> s2 = new SortedArrayStream<Fruit>(
+        new Fruit[]{new Fruit("Watermelon"), new Fruit("Apple")});
       SortedArrayStream<Fruit> s3 = new SortedArrayStream<Fruit>(new Fruit[]{});
-      SortedArrayStream<Fruit> s4 =
-        new SortedArrayStream<Fruit>(new Fruit[]{new Fruit("Pineapple"), new Fruit("Apple"), new Fruit("Orange")});
-      SortedArrayStream<Fruit> s5 =
-        new SortedArrayStream<Fruit>(new Fruit[]{new Fruit("Banana")});
+      SortedArrayStream<Fruit> s4 = new SortedArrayStream<Fruit>(
+        new Fruit[]{new Fruit("Pineapple"), new Fruit("Apple"), new Fruit("Orange")});
+      SortedArrayStream<Fruit> s5 = new SortedArrayStream<Fruit>(
+        new Fruit[]{null, new Fruit("Banana"), null}, new ComparableComparator<Fruit>());
       List<ISortedStream<Fruit>> streams = new ArrayList<ISortedStream<Fruit>>(10);
       streams.add(s1);
       streams.add(s2);
@@ -115,13 +119,25 @@ public class TestSortedStreamManager
       streams.add(s5);
       SortedStreamManager<Fruit> mgr = new SortedStreamManager<Fruit>(streams);
 
-      Fruit[] expected = {new Fruit("Apple"),new Fruit("Apple"),new Fruit("Banana"),new Fruit("Orange"),new Fruit("Pineapple"),new Fruit("Watermelon")};
+      Fruit[] expected =
+        {null, null, new Fruit("Apple"),new Fruit("Apple"),
+         new Fruit("Banana"),new Fruit("Orange"),new Fruit("Pineapple"),
+         new Fruit("Watermelon")};
       for (Fruit i : expected)
       {
         assertEquals(true, mgr.hasNext());
-        assertEquals(0, i.compareTo((Fruit)mgr.next()));
+        //assertEquals(0, i.compareTo((Fruit)mgr.next()));
+        assertEquals(true, isEqual(mgr.next(), i));
       }
       assertEquals(false, mgr.hasNext());
     }
+  }
+  
+  private <T> boolean isEqual(Comparable<T> c1, T c2)
+  {
+    if (c1 == null || c2 == null) {
+      return (c1 == c2);
+    }
+    return (c1.compareTo(c2) == 0);
   }
 }

@@ -1,4 +1,4 @@
-package jon.sandbox.code.streams;
+package jon.sandbox.code.stream;
 
 import java.util.NoSuchElementException;
 

@@ -1,4 +1,4 @@
-package jon.sandbox.code.streams;
+package jon.sandbox.code.stream;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +17,7 @@ public class SortedStreamManager<E extends Comparable<E>>
      }
 
      // Initialize the list of "head inputs" (initial input from each stream)
-     // Optimization: Only track streams that have input
-     //m_streams = streams;
+     // Only manage streams that have input
      m_headInputs = new ArrayList<HeadInput<E>>(streams.size());
      for (ISortedStream<E> stream : streams)
      {
@@ -47,12 +46,12 @@ public class SortedStreamManager<E extends Comparable<E>>
     }
 
     // Get minimum value from the array of "head inputs"
-    E minElement = null;
-    int minHeadInputIndex = -1;
-    for (int i = 0, n = m_headInputs.size(); i < n; i++)
+    E minElement = m_headInputs.get(0).peek();
+    int minHeadInputIndex = 0;
+    for (int i = 1, n = m_headInputs.size(); i < n; i++)
     {
-      E curElement = m_headInputs.get(i).getHeadElement();
-      if (minElement == null || curElement.compareTo(minElement) < 0)
+      E curElement = m_headInputs.get(i).peek();
+      if (minElement != null && (curElement == null || curElement.compareTo(minElement) < 0))
       {
         minElement = curElement;
         minHeadInputIndex = i;
@@ -99,7 +98,7 @@ public class SortedStreamManager<E extends Comparable<E>>
       return m_headElement;
     }
 
-    public E getHeadElement()
+    public E peek()
     {
       return m_headElement;
     }
@@ -108,7 +107,6 @@ public class SortedStreamManager<E extends Comparable<E>>
     private E m_headElement;
   };
 
-  //private final ISortedStream<E>[] m_streams;
   final ArrayList<HeadInput<E>> m_headInputs;
 }
 
