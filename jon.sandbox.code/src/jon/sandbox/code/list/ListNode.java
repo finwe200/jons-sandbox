@@ -1,20 +1,19 @@
-package jon.sandbox.code.tree;
+package jon.sandbox.code.list;
 
-public class BinaryTreeNode<T>
+public class ListNode<T> //implements Comparable<T>
 {
-  public BinaryTreeNode(Comparable<T> data)
+  public ListNode(Comparable<T> data)
   {
     super();
 
     if (data == null)
     {
       throw new IllegalArgumentException(
-        "Cannot pass null data to BinaryTreeNode constructor!");
+        "Cannot pass null data to ListNode constructor!");
     }
 
     m_data = data;
-    m_leftNode = null;
-    m_rightNode = null;
+    m_next = null;
   }
 
   public Comparable<T> getData()
@@ -29,6 +28,5 @@ public class BinaryTreeNode<T>
   }
 
   private final Comparable<T> m_data;
-  BinaryTreeNode<T> m_leftNode;
-  BinaryTreeNode<T> m_rightNode;
+  ListNode<T> m_next;
 }

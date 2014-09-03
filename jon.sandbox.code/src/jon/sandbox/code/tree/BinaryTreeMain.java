@@ -1,28 +1,12 @@
 package jon.sandbox.code.tree;
 
 import jon.sandbox.code.basic.Fruit;
-import jon.sandbox.code.stream.SortedStreamManager;
 
 public class BinaryTreeMain extends Object
 {
   public BinaryTreeMain()
   {
     super();
-  }
-
-  static public void output(SortedStreamManager<?> mgr)
-  {
-    System.out.print("[");
-    for (boolean firstElement = true; mgr.hasNext(); firstElement = false)
-    {
-      if (!firstElement) {
-        System.out.print(','); 
-      }
-      Object obj = mgr.next();
-      String name = (obj == null) ? "null" : obj.toString();
-      System.out.print(name);
-    }
-    System.out.println("]");
   }
 
   static public void main(String[] args)

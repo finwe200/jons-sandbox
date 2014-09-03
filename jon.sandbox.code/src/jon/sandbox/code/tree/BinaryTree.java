@@ -8,13 +8,12 @@ public class BinaryTree<T>
   public BinaryTree()
   {
     super();
-
     m_root = null;
   }
 
   public BinaryTreeNode<T> add(Comparable<T> data)
   {
-    // Create an affiliate "node". An Exception will be throw in data is null
+    // Create an affiliate "node". An Exception will be throw if data is null
     BinaryTreeNode<T> newNode = new BinaryTreeNode<T>(data);
 
     if (m_root == null) {
