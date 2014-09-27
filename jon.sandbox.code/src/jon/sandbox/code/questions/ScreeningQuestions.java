@@ -5,26 +5,44 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import jon.sandbox.code.basic.Fruit;
+
 public class ScreeningQuestions
 {
   public static void main(String[] args)
   {
-    Integer[] input = {1, 2, 3, 3, 3, 4, 4, 10, 13, 15, 15, 17};
-    printArray(input);
-    Integer[] output = removeDuplicates(input);
-    printArray(output);
+    {
+      Integer[] input = {1, 2, 3, 3, 3, 4, 4, 10, 13, 15, 15, 17};
+      printArray(input);
+      Integer[] output = removeDuplicates(input);
+      printArray(output);
+  
+      System.out.println();
+      printArray(input);
+      output = removeDuplicates2(input);
+      printArray(output);
+    }
 
-    System.out.println();
-    printArray(input);
-    output = removeDuplicates(input);
-    printArray(output);
-    
+    {
+      System.out.println();
+      Fruit[] input = {new Fruit("Apple"), new Fruit("Banana"), new Fruit("Banana"), new Fruit("Lemon"), new Fruit("Lemon")};
+      printArray(input);
+      Fruit[] output = removeDuplicates(input);
+      printArray(output);
+
+      System.out.println();
+      printArray(input);
+      output = removeDuplicates2(input);
+      printArray(output);
+    }
     
     System.out.println();
     printSquareRoot(2);
     printSquareRoot(4);
     printSquareRoot(16);
     printSquareRoot(30);
+    printSquareRoot(1056);
+    printSquareRoot(1000000);
   }
 
   /*
@@ -174,7 +192,7 @@ public class ScreeningQuestions
 
   static private <T> void printArray(T[] elements)
   {
-    System.out.print("\n" + elements.getClass().getSimpleName() + "(" + elements.length + "): [");
+    System.out.print(elements.getClass().getSimpleName() + "(" + elements.length + "): [");
     for (int i = 0, n = elements.length; i < n; i++)
     {
       if (i > 0) {
@@ -213,10 +231,8 @@ public class ScreeningQuestions
   static public double square_root(double a, double epsilon)
   {
     int count = 1;
-    double estimate = 4;
+    double estimate = getInitialEstimate(a);
     double sumOfEstimates = estimate;
-//    List<Double> estimates = new ArrayList<Double>(10);
-//    estimates.add(estimate);
 
     while (true)
     {
@@ -230,6 +246,21 @@ public class ScreeningQuestions
       count++;
       estimate = sumOfEstimates / count;
     }
+  }
+  
+  static private double getInitialEstimate(double num)
+  {
+    int numAsInt = (int)Math.round(num);
+    int powOfTen = 1;
+    for (int i = 0, n = ms_initialEstimates.length; i < n; i++)
+    {
+      int lowerBound = (i == 0) ? 0 : powOfTen;
+      powOfTen *= 10;
+      if (numAsInt >= lowerBound && numAsInt <= powOfTen) {
+        return ms_initialEstimates[i];
+      }
+    }
+    return ms_initialEstimates[ms_initialEstimates.length - 1];
   }
 
   static private void printSquareRoot(double a, double epislon)
@@ -251,4 +282,7 @@ public class ScreeningQuestions
     printSquareRoot(a, 0.005);
     printSquareRoot(a, 1e-6);
   }
+
+  // Initial "square-root estimate" for each power of 10: 0-10, 11-100, 101-1000, etc. 
+  static private final double[] ms_initialEstimates = {3, 5, 16, 50, 158, 500, 1581};
 };

@@ -3,6 +3,7 @@ package jon.sandbox.code.questions;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+import jon.sandbox.code.basic.Fruit;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -36,7 +37,7 @@ public class TestRemoveDuplicates
   @Test
   public void testRemoveDuplicates()
   {
-    // Normal case
+    // Normal case for Integers
     {
       Integer[] input = {1, 2, 3, 3, 3, 4, 4, 10, 13, 15, 15, 17};
       Integer[] output = ScreeningQuestions.removeDuplicates(input);
@@ -49,6 +50,19 @@ public class TestRemoveDuplicates
       assertEquals(13, output[5].intValue());
       assertEquals(15, output[6].intValue());
       assertEquals(17, output[7].intValue());
+    }
+
+    // Normal case for Fruits
+    {
+      Fruit apple = new Fruit("Apple");
+      Fruit banana = new Fruit("Banana");
+      Fruit lemon = new Fruit("Lemon");
+      Fruit[] input = {apple, apple, banana, banana, banana, lemon, lemon};
+      Fruit[] output = ScreeningQuestions.removeDuplicates(input);
+      assertEquals(3, output.length);
+      assertEquals(apple, output[0]);
+      assertEquals(banana, output[1]);
+      assertEquals(lemon, output[2]);
     }
 
     // Empty Array
@@ -112,7 +126,7 @@ public class TestRemoveDuplicates
   @Test
   public void testRemoveDuplicates2()
   {
-    // Normal case
+    // Normal case for Integers
     {
       Integer[] input = {1, 2, 3, 3, 3, 4, 4, 10, 13, 15, 15, 17};
       Integer[] output = ScreeningQuestions.removeDuplicates2(input);
@@ -125,6 +139,19 @@ public class TestRemoveDuplicates
       assertEquals(13, output[5].intValue());
       assertEquals(15, output[6].intValue());
       assertEquals(17, output[7].intValue());
+    }
+
+    // Normal case for Fruits
+    {
+      Fruit apple = new Fruit("Apple");
+      Fruit banana = new Fruit("Banana");
+      Fruit lemon = new Fruit("Lemon");
+      Fruit[] input = {apple, apple, banana, banana, banana, lemon, lemon};
+      Fruit[] output = ScreeningQuestions.removeDuplicates2(input);
+      assertEquals(3, output.length);
+      assertEquals(apple, output[0]);
+      assertEquals(banana, output[1]);
+      assertEquals(lemon, output[2]);
     }
 
     // Empty Array
