@@ -1,7 +1,6 @@
 package jon.sandbox.code.questions;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import jon.sandbox.code.basic.Fruit;
 
@@ -40,7 +39,8 @@ public class TestRemoveDuplicates
     // Normal case for Integers
     {
       Integer[] input = {1, 2, 3, 3, 3, 4, 4, 10, 13, 15, 15, 17};
-      Integer[] output = ScreeningQuestions.removeDuplicates(input);
+      ScreeningQuestions<Integer> sq = new ScreeningQuestions<Integer>(Integer.class);
+      Integer[] output = sq.removeDuplicates(input);
       assertEquals(8, output.length);
       assertEquals(1, output[0].intValue());
       assertEquals(2, output[1].intValue());
@@ -58,7 +58,8 @@ public class TestRemoveDuplicates
       Fruit banana = new Fruit("Banana");
       Fruit lemon = new Fruit("Lemon");
       Fruit[] input = {apple, apple, banana, banana, banana, lemon, lemon};
-      Fruit[] output = ScreeningQuestions.removeDuplicates(input);
+      ScreeningQuestions<Fruit> sq = new ScreeningQuestions<Fruit>(Fruit.class);
+      Fruit[] output = sq.removeDuplicates(input);
       assertEquals(3, output.length);
       assertEquals(apple, output[0]);
       assertEquals(banana, output[1]);
@@ -67,16 +68,16 @@ public class TestRemoveDuplicates
 
     // Empty Array
     {
-      Integer[] input = {};
-      Integer[] output = ScreeningQuestions.removeDuplicates(input);
-      assertTrue(null == output);
+      Double[] input = {};
+      Double[] output = new ScreeningQuestions<Double>(Double.class).removeDuplicates(input);
+      assertEquals(0, output.length);
     }
 
     // Negative test: Pass in null!
     {
       try 
       {
-        ScreeningQuestions.removeDuplicates(null);
+        new ScreeningQuestions<Integer>(Integer.class).removeDuplicates(null);
         fail("removeDuplicates(null) must thrown an IllegalArgumentException!");
       }
       catch (IllegalArgumentException e)
@@ -93,7 +94,7 @@ public class TestRemoveDuplicates
       try 
       {
         Integer[] input = {1, null, 2,};
-        ScreeningQuestions.removeDuplicates(input);
+        new ScreeningQuestions<Integer>(Integer.class).removeDuplicates(input);
         fail("removeDuplicates() with null elements must throw an IllegalArgumentException!");
       }
       catch (IllegalArgumentException e)
@@ -110,7 +111,7 @@ public class TestRemoveDuplicates
       try 
       {
         Integer[] input = {1, 3, 2};
-        ScreeningQuestions.removeDuplicates(input);
+        new ScreeningQuestions<Integer>(Integer.class).removeDuplicates(input);
         fail("removeDuplicates() with non-sorted elements must throw an IllegalArgumentException!");
       }
       catch (IllegalArgumentException e)
@@ -129,7 +130,8 @@ public class TestRemoveDuplicates
     // Normal case for Integers
     {
       Integer[] input = {1, 2, 3, 3, 3, 4, 4, 10, 13, 15, 15, 17};
-      Integer[] output = ScreeningQuestions.removeDuplicates2(input);
+      ScreeningQuestions<Integer> sq = new ScreeningQuestions<Integer>(Integer.class);
+      Integer[] output = sq.removeDuplicates2(input);
       assertEquals(8, output.length);
       assertEquals(1, output[0].intValue());
       assertEquals(2, output[1].intValue());
@@ -147,7 +149,8 @@ public class TestRemoveDuplicates
       Fruit banana = new Fruit("Banana");
       Fruit lemon = new Fruit("Lemon");
       Fruit[] input = {apple, apple, banana, banana, banana, lemon, lemon};
-      Fruit[] output = ScreeningQuestions.removeDuplicates2(input);
+      ScreeningQuestions<Fruit> sq = new ScreeningQuestions<Fruit>(Fruit.class);
+      Fruit[] output = sq.removeDuplicates2(input);
       assertEquals(3, output.length);
       assertEquals(apple, output[0]);
       assertEquals(banana, output[1]);
@@ -156,16 +159,17 @@ public class TestRemoveDuplicates
 
     // Empty Array
     {
+      ScreeningQuestions<Integer> sq = new ScreeningQuestions<Integer>(Integer.class);
       Integer[] input = {};
-      Integer[] output = ScreeningQuestions.removeDuplicates2(input);
-      assertTrue(null == output);
+      Integer[] output = sq.removeDuplicates2(input);
+      assertEquals(0, output.length);
     }
 
     // Negative test: Pass in null!
     {
       try 
       {
-        ScreeningQuestions.removeDuplicates2(null);
+        new ScreeningQuestions<Double>(Double.class).removeDuplicates2(null);
         fail("removeDuplicates2(null) must thrown an IllegalArgumentException!");
       }
       catch (IllegalArgumentException e)
@@ -182,7 +186,7 @@ public class TestRemoveDuplicates
       try 
       {
         Integer[] input = {1, null, 2,};
-        ScreeningQuestions.removeDuplicates2(input);
+        new ScreeningQuestions<Integer>(Integer.class).removeDuplicates2(input);
         fail("removeDuplicates2() with null elements must throw an IllegalArgumentException!");
       }
       catch (IllegalArgumentException e)
@@ -199,7 +203,7 @@ public class TestRemoveDuplicates
       try 
       {
         Integer[] input = {1, 3, 2};
-        ScreeningQuestions.removeDuplicates2(input);
+        new ScreeningQuestions<Integer>(Integer.class).removeDuplicates2(input);
         fail("removeDuplicates2() with non-sorted elements must throw an IllegalArgumentException!");
       }
       catch (IllegalArgumentException e)

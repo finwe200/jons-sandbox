@@ -7,32 +7,45 @@ import java.util.List;
 
 import jon.sandbox.code.basic.Fruit;
 
-public class ScreeningQuestions
+public class ScreeningQuestions<E extends Comparable<E>> extends Object
 {
+  /**
+   * 
+   * @param clazz this parameter provides the type information needed to
+   *  create an array of E at runtime! 
+   */
+  public ScreeningQuestions(Class<E> clazz)
+  {
+    super();
+    m_class = clazz;
+  }
+
   public static void main(String[] args)
   {
     {
+      ScreeningQuestions<Integer> sq = new ScreeningQuestions<Integer>(Integer.class);
       Integer[] input = {1, 2, 3, 3, 3, 4, 4, 10, 13, 15, 15, 17};
       printArray(input);
-      Integer[] output = removeDuplicates(input);
+      Integer[] output = sq.removeDuplicates(input);
       printArray(output);
   
       System.out.println();
       printArray(input);
-      output = removeDuplicates2(input);
+      output = sq.removeDuplicates2(input);
       printArray(output);
     }
 
     {
+      ScreeningQuestions<Fruit> sq = new ScreeningQuestions<Fruit>(Fruit.class);
       System.out.println();
       Fruit[] input = {new Fruit("Apple"), new Fruit("Banana"), new Fruit("Banana"), new Fruit("Lemon"), new Fruit("Lemon")};
       printArray(input);
-      Fruit[] output = removeDuplicates(input);
+      Fruit[] output = sq.removeDuplicates(input);
       printArray(output);
 
       System.out.println();
       printArray(input);
-      output = removeDuplicates2(input);
+      output = sq.removeDuplicates2(input);
       printArray(output);
     }
     
@@ -66,7 +79,7 @@ public class ScreeningQuestions
    *  elements contained in values are null, or values is not in sorted order.
    */
   @SuppressWarnings("unchecked")
-  static public <E> E[] removeDuplicates(Comparable<E>[] values)
+  public E[] removeDuplicates(Comparable<E>[] values)
   {
     if (values == null)
     {
@@ -97,13 +110,22 @@ public class ScreeningQuestions
       prev = (E)e;
     }
 
+    /*
+    Type type = this.getClass().getGenericSuperclass();
+    System.out.println("GenericSuperclass : " + type);
+    System.out.println("GenericSuperclass class : " + type.getClass());
+    if(type instanceof ParameterizedType)
+    {
+      ParameterizedType pt = (ParameterizedType)type;
+      System.out.println("ParameterizedType : " + pt);
+      System.out.println("ParameterizedType OwnerType : " + pt.getOwnerType());
+      System.out.println("ParameterizedType RawType : " + pt.getRawType());
+    }
+    */
+
     // To create an array of T in JAVA you must know the class type for
     // the array (Collections and generics work differently)
-    if (numNonDups == 0) {
-      return null;
-    }
-    E ee = (E)values[0];
-    E[] nonDups = (E[])Array.newInstance(ee.getClass(), numNonDups);
+    E[] nonDups = (E[])Array.newInstance(m_class, numNonDups);
 
     // Only store non-duplicates in the new array
     prev = null;
@@ -148,7 +170,7 @@ public class ScreeningQuestions
    *  elements contained in values are null, or values is not in sorted order.
    */
   @SuppressWarnings("unchecked")
-  static public <E> E[] removeDuplicates2(Comparable<E>[] values)
+  public E[] removeDuplicates2(Comparable<E>[] values)
   {
     if (values == null)
     {
@@ -157,7 +179,7 @@ public class ScreeningQuestions
 
     // Create list of non-duplicates
     ArrayIterator<Comparable<E>> itr = new ArrayIterator<Comparable<E>>(values);
-    List<E> output = new ArrayList<E>(values.length);
+    List<E> nonDups = new ArrayList<E>(values.length);
     E prev = null;
     while (itr.hasNext())
     {
@@ -175,21 +197,23 @@ public class ScreeningQuestions
       }
       if (comp != 0)
       {
-        output.add((E)e);
+        nonDups.add((E)e);
       }
       prev = (E)e;
     }
 
     // To create an array of T in JAVA you must know the class type for
     // the array (Collections and generics work differently)
-    if (output.size() == 0) {
-      return null;
-    }
-    E e1 = output.get(0);
-    E[] rtn = output.toArray((E[]) Array.newInstance(e1.getClass(), output.size()));
+    E[] rtn = nonDups.toArray((E[]) Array.newInstance(m_class, nonDups.size()));
+
     return rtn;
   }
 
+  public E dummyMethod()
+  {
+    return null;
+  }
+  
   static private <T> void printArray(T[] elements)
   {
     System.out.print(elements.getClass().getSimpleName() + "(" + elements.length + "): [");
@@ -285,4 +309,6 @@ public class ScreeningQuestions
 
   // Initial "square-root estimate" for each power of 10: 0-10, 11-100, 101-1000, etc. 
   static private final double[] ms_initialEstimates = {3, 5, 16, 50, 158, 500, 1581};
+
+  private final Class<E> m_class;
 };
