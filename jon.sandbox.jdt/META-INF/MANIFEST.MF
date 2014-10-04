@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Jdt
+Bundle-SymbolicName: jon.sandbox.jdt;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: jon.sandbox.jdt.Activator
+Require-Bundle: org.eclipse.jface.text;bundle-version="3.8.101",
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources;bundle-version="3.8.101",
+ org.eclipse.ui,
+ org.eclipse.ui.ide;bundle-version="3.9.2",
+ org.eclipse.jdt;bundle-version="3.9.1",
+ org.eclipse.jdt.core;bundle-version="3.9.2",
+ org.eclipse.jdt.ui;bundle-version="3.9.2"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

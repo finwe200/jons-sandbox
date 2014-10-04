@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="Sample Category"
+            id="jon.sandbox.jdt.commands.category">
+      </category>
+      <command
+            name="Print Package meta-data"
+            categoryId="jon.sandbox.jdt.commands.category"
+            id="jon.sandbox.jdt.commands.printPackageMetaData">
+      </command>
+      <command
+            categoryId="jon.sandbox.jdt.commands.category"
+            id="jon.sandbox.jdt.commands.createBasePackage"
+            name="Create base-package">
+      </command>
+      <command
+            categoryId="jon.sandbox.jdt.commands.category"
+            id="jon.sandbox.jdt.commands.buildAST"
+            name="Build AST">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="jon.sandbox.jdt.commands.printPackageMetaData"
+            class="jon.sandbox.jdt.handlers.PrintPackageMetaDataHandler">
+      </handler>
+      <handler
+            class="jon.sandbox.jdt.handlers.CreateBasePackageHandler"
+            commandId="jon.sandbox.jdt.commands.createBasePackage">
+      </handler>
+      <handler
+            class="jon.sandbox.jdt.handlers.BuildASTHandler"
+            commandId="jon.sandbox.jdt.commands.buildAST">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="jon.sandbox.jdt.commands.printPackageMetaData"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+6"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="JDT"
+               mnemonic="M"
+               id="jon.sandbox.jdt.menus.jdt">
+            <command
+                  commandId="jon.sandbox.jdt.commands.printPackageMetaData"
+                  icon="icons/sample.gif"
+                  id="jon.sandbox.jdt.menus.printPackageMetaData"
+                  mnemonic="P"
+                  tooltip="Print Package meta-data">
+            </command>
+            <command
+                  commandId="jon.sandbox.jdt.commands.createBasePackage"
+                  icon="icons/package.png"
+                  id="jon.sandbox.jdt.menus.createBasePackage"
+                  style="push">
+            </command>
+            <command
+                  commandId="jon.sandbox.jdt.commands.buildAST"
+                  icon="icons/ast.png"
+                  id="jon.sandbox.jdt.menus.buildAST"
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="jon.sandbox.jdt.toolbars.jdt">
+            <command
+                  commandId="jon.sandbox.jdt.commands.printPackageMetaData"
+                  icon="icons/sample.gif"
+                  tooltip="Print Package meta-data"
+                  id="jon.sandbox.jdt.toolbars.printPackageMetaData">
+            </command>
+            <command
+                  commandId="jon.sandbox.jdt.commands.createBasePackage"
+                  icon="icons/package.png"
+                  id="jon.sandbox.jdt.toolbars.createBasePackage"
+                  style="push">
+            </command>
+            <command
+                  commandId="jon.sandbox.jdt.commands.buildAST"
+                  icon="icons/ast.png"
+                  id="jon.sandbox.jdt.toolbars.buildAST"
+                  style="push">
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+
+</plugin>
