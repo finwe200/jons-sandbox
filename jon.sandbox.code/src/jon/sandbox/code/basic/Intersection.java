@@ -5,10 +5,6 @@ import java.util.HashMap;
 
 public class Intersection<T>
 {
-  public static void main(String[] args)
-  {
-  }
-  
   @SuppressWarnings("unchecked")
   public Intersection(Class<T> clazz, T[] array1, T[] array2)
   {
