@@ -1,4 +1,4 @@
-package jon.sandbox.code.questions;
+package jon.sandbox.code.questions.ns;
 
 import java.lang.reflect.Array;
 import java.text.MessageFormat;

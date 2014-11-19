@@ -1,4 +1,4 @@
-package jon.sandbox.code.questions;
+package jon.sandbox.code.questions.ns;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
