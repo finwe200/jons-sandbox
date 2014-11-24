@@ -10,7 +10,6 @@ import org.junit.Test;
 
 public class TestScreeningQuestions
 {
-  
   @BeforeClass
   public static void setUpBeforeClass() throws Exception
   {
@@ -79,6 +78,10 @@ public class TestScreeningQuestions
   {
     ScreeningQuestions sc = new ScreeningQuestions();
 
+    assertEquals(false, sc.containsTwoContiguousSubArraysWithEqualSums(null));
+    assertEquals(false, sc.containsTwoContiguousSubArraysWithEqualSums(new int[0]));
+    assertEquals(false, sc.containsTwoContiguousSubArraysWithEqualSums(new int[]{10}));
+
     assertEquals(
       true,
       sc.containsTwoContiguousSubArraysWithEqualSums(new int[]{10,15,20,2,2,1})
@@ -92,6 +95,111 @@ public class TestScreeningQuestions
     assertEquals(
       true,
       sc.containsTwoContiguousSubArraysWithEqualSums(new int[]{0,0,0,0})
+    );
+
+    assertEquals(
+      false,
+      sc.containsTwoContiguousSubArraysWithEqualSums(new int[]{4,5,1})
+    );
+
+    assertEquals(
+      true,
+      sc.containsTwoContiguousSubArraysWithEqualSums(new int[]{4,1,5})
+    );
+
+    assertEquals(
+      false,
+      sc.containsTwoContiguousSubArraysWithEqualSums(new int[]{12,16,6,2,4,4})
+    );
+
+    assertEquals(
+      false,
+      sc.containsTwoContiguousSubArraysWithEqualSums(new int[]{12,1,11,3,32,13})
+    );
+
+    assertEquals(
+      false,
+      sc.containsTwoContiguousSubArraysWithEqualSums(new int[]{12,7,38,12,20,13})
+    );
+
+    assertEquals(
+      false,
+      sc.containsTwoContiguousSubArraysWithEqualSums(new int[]{12,7,38,12,101,32})
+    );
+
+    assertEquals(
+      true,
+      sc.containsTwoContiguousSubArraysWithEqualSums(new int[]{12,7,38,12,32,101})
+    );
+
+    assertEquals(
+      false,
+      sc.containsTwoContiguousSubArraysWithEqualSums(new int[]{12,7,38,12,32,101,400,52})
+    );
+  }
+
+  @Test
+  public void testContainsTwoSubArraysWithEqualSums()
+  {
+    ScreeningQuestions sc = new ScreeningQuestions();
+
+    assertEquals(false, sc.containsTwoSubArraysWithEqualSums(null));
+    assertEquals(false, sc.containsTwoSubArraysWithEqualSums(new int[0]));
+    assertEquals(false, sc.containsTwoSubArraysWithEqualSums(new int[]{10}));
+
+    assertEquals(
+      true,
+      sc.containsTwoSubArraysWithEqualSums(new int[]{10,15,20,2,2,1})
+    );
+
+    assertEquals(
+      false,
+      sc.containsTwoSubArraysWithEqualSums(new int[]{10,15,20,2,2,2})
+    );
+
+    assertEquals(
+      true,
+      sc.containsTwoSubArraysWithEqualSums(new int[]{0,0,0,0})
+    );
+
+    assertEquals(
+      true,
+      sc.containsTwoSubArraysWithEqualSums(new int[]{4,5,1})
+    );
+
+    assertEquals(
+      true,
+      sc.containsTwoSubArraysWithEqualSums(new int[]{4,1,5})
+    );
+
+    assertEquals(
+      true,
+      sc.containsTwoSubArraysWithEqualSums(new int[]{12,16,6,2,4,4})
+    );
+    
+    assertEquals(
+      true,
+      sc.containsTwoSubArraysWithEqualSums(new int[]{12,1,11,3,32,13})
+    );
+
+    assertEquals(
+      true,
+      sc.containsTwoSubArraysWithEqualSums(new int[]{12,7,38,12,20,13})
+    );
+
+    assertEquals(
+      true,
+      sc.containsTwoSubArraysWithEqualSums(new int[]{12,7,38,12,101,32})
+    );
+
+    assertEquals(
+      true,
+      sc.containsTwoSubArraysWithEqualSums(new int[]{12,7,38,12,32,101})
+    );
+
+    assertEquals(
+      false,
+      sc.containsTwoSubArraysWithEqualSums(new int[]{12,7,38,12,32,101,400,52})
     );
   }
 
@@ -118,5 +226,4 @@ public class TestScreeningQuestions
     assertEquals("a", sc.insertAsteriskBetweenEachCharacter2("a"));
     assertEquals("1*2*3*a*b*c*4*5*6", sc.insertAsteriskBetweenEachCharacter2("123abc456"));
   }
-
 }
