@@ -28,10 +28,11 @@ public class ScreeningQuestions
    *  of combinations to evaluate). The directions were a little ambiguous so I
    *  hope this assumption is OK.
    * 
-   * @param arry
+   * @param arry The array of integers to evaluate.
    * 
    * @return true if two contiguous sub-arrays can be found which yield
-   *  equal sums, otherwise return false.
+   *  equal sums, otherwise return false. A value of null, an empty array, or
+   *  an array of one element will return false.
    */
   public boolean containsTwoContiguousSubArraysWithEqualSums(int[] arry)
   {
@@ -61,8 +62,9 @@ public class ScreeningQuestions
    * 
    * @param arry
    * 
-   * @return true if two contiguous sub-arrays can be found which yield
-   *  equal sums, otherwise return false.
+   * @return true if any two sub-arrays can be found which yield
+   *  equal sums, otherwise return false. A value of null, an empty array, or
+   *  an array of one element will return false.
    */
   public boolean containsTwoSubArraysWithEqualSums(int[] arry)
   {
@@ -71,7 +73,7 @@ public class ScreeningQuestions
     }
 
     // Outer loop to evaluate all possible segment sizes. Only need to evaluate 
-    // 1/2 of the possible segments since two segments sizes are evaluated
+    // 1/2 of the possible segment sizess since two segments sizes are evaluated
     // per pass.
     // Example: If an array has 6 elements and a segment size of 1 is evaluated
     //          then a segment size of 5 is also evaluated.  
@@ -84,15 +86,16 @@ public class ScreeningQuestions
       // for a given segment size
       int[] segmentIndicies = createAndInitializeSegmentIndicies(segmentSize);
 
-      // Inner loop to evaluate all combinations for a segment size
+      // Inner loop to evaluate all combinations for a given segment size
       do 
       {
         // See if sum of current segment matches sum of everything else
         int segmentSum = sum(arry, segmentIndicies);
-        if (segmentSum == sumForAll - segmentSum)
+        int sum2 = sumForAll - segmentSum;
+        if (segmentSum == sum2)
         {
           //System.out.println(
-          //  " Sum1=" + segmentSum + ", Sum2=" + (sumForAll - segmentSum) +
+          //  " Sum1=" + segmentSum + ", Sum2=" + sum2 +
           //  " (segmentSize=" + segmentSize + ", indicies=" + toString(segmentIndicies) + ")"
           //);
           return true;
