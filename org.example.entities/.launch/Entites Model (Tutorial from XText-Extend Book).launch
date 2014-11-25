@@ -12,7 +12,7 @@
 <booleanAttribute key="clearwslog" value="false"/>
 <stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/Entites Model (Tutorial from XText-Extend Book)"/>
 <booleanAttribute key="default" value="false"/>
-<stringAttribute key="deselected_workspace_plugins" value="org.eclipse.xtext.example.arithmetics,org.eclipse.xtext.example.arithmetics.tests,org.eclipse.xtext.example.arithmetics.ui,org.eclipse.xtext.tutorial.survey,org.eclipse.xtext.tutorial.survey.tests,org.eclipse.xtext.tutorial.survey.ui,org.example.domainmodel,org.example.domainmodel.tests,org.example.domainmodel.ui,org.example.entities.tests"/>
+<stringAttribute key="deselected_workspace_plugins" value="org.example.entities.tests"/>
 <booleanAttribute key="includeOptional" value="true"/>
 <stringAttribute key="location" value="/workspaces/runtime-Xtext-Kepler-SR2-Entities"/>
 <listAttribute key="org.eclipse.debug.ui.favoriteGroups">

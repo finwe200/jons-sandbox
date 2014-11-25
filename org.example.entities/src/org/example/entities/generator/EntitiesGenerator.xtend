@@ -34,7 +34,7 @@ class EntitiesGenerator implements IGenerator {
     public class «entity.name»«IF entity.superType != null» extends «entity.superType.name» «ENDIF»
     {
       «FOR attribute : entity.attributes»
-      private «attribute.type.compile(true)» «attribute.name»
+      private «attribute.type.compile(false)» «attribute.name»;
       «ENDFOR»
 
       «FOR attribute : entity.attributes»
