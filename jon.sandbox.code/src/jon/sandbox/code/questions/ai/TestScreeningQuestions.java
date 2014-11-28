@@ -88,6 +88,11 @@ public class TestScreeningQuestions
     );
 
     assertEquals(
+      true,
+      sc.containsTwoContiguousSubArraysWithEqualSums(new int[]{-10,-15,-20,-2,-2,-1})
+    );
+
+    assertEquals(
       false,
       sc.containsTwoContiguousSubArraysWithEqualSums(new int[]{10,15,20,2,2,2})
     );
@@ -136,6 +141,11 @@ public class TestScreeningQuestions
       false,
       sc.containsTwoContiguousSubArraysWithEqualSums(new int[]{12,7,38,12,32,101,400,52})
     );
+
+    assertEquals(
+      false,
+      sc.containsTwoContiguousSubArraysWithEqualSums(new int[]{122,70,58,-31,32,400,201,52})
+    );
   }
 
   @Test
@@ -150,6 +160,11 @@ public class TestScreeningQuestions
     assertEquals(
       true,
       sc.containsTwoSubArraysWithEqualSums(new int[]{10,15,20,2,2,1})
+    );
+
+    assertEquals(
+      true,
+      sc.containsTwoContiguousSubArraysWithEqualSums(new int[]{-10,-15,-20,-2,-2,-1})
     );
 
     assertEquals(
@@ -200,6 +215,11 @@ public class TestScreeningQuestions
     assertEquals(
       false,
       sc.containsTwoSubArraysWithEqualSums(new int[]{12,7,38,12,32,101,400,52})
+    );
+
+    assertEquals(
+      true,
+      sc.containsTwoSubArraysWithEqualSums(new int[]{122,70,58,-31,32,400,201,52})
     );
   }
 

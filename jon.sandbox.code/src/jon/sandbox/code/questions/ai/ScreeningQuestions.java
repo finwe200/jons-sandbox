@@ -36,20 +36,31 @@ public class ScreeningQuestions
    */
   public boolean containsTwoContiguousSubArraysWithEqualSums(int[] arry)
   {
-    if (arry == null) {
+    if (arry == null || arry.length < 2) {
       return false;
     }
 
-    for (int i = 0, n = arry.length; i < n; i++)
+    // Iterate on each loop to compute the sums!
+//  for (int i = 0, n = arry.length; i < n; i++)
+//  {
+//    int sum1 = sum(arry, 0, i);
+//    int sum2 = sum(arry, i + 1, n -1);
+//    if (sum1 == sum2)
+//    {
+//      return true;
+//    }
+//  }
+
+    // Do minimal effort to compute the 2 sums
+    int sum1 = 0;
+    int sum2 = sum(arry, 0, arry.length - 1);
+    for (int i = 0, n = arry.length - 1; i < n; i++)
     {
-      int sum1 = sum(arry, 0, i);
-      int sum2 = sum(arry, i + 1, n -1);
+      int ithElement = arry[i];
+      sum1 += ithElement;
+      sum2 -= ithElement;
       if (sum1 == sum2)
       {
-        //System.out.println(
-        //  " Sum1=" + sum1 + ", Sum2=" + sum2 +
-        //  " (i=" + i + ")"
-        //);
         return true;
       }
     }
@@ -92,12 +103,12 @@ public class ScreeningQuestions
         // See if sum of current segment matches sum of everything else
         int segmentSum = sum(arry, segmentIndicies);
         int sum2 = sumForAll - segmentSum;
+        //System.out.println(
+        //  " Sum1=" + segmentSum + ", Sum2=" + sum2 +
+        //  " (segmentSize=" + segmentSize + ", indicies=" + toString(segmentIndicies) + ")"
+        //);
         if (segmentSum == sum2)
         {
-          //System.out.println(
-          //  " Sum1=" + segmentSum + ", Sum2=" + sum2 +
-          //  " (segmentSize=" + segmentSize + ", indicies=" + toString(segmentIndicies) + ")"
-          //);
           return true;
         }
       }
@@ -201,7 +212,7 @@ public class ScreeningQuestions
   }
 
   /** Normally I would not solve this type of problem with recursion!
-   *  Note: This function will fail if the input contains an asterisk!
+   *  Note: This function will not work correctly if the input contains an '*'!
    * 
    * @param str
    * @return
