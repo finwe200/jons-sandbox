@@ -246,4 +246,26 @@ public class TestScreeningQuestions
     assertEquals("a", sc.insertAsteriskBetweenEachCharacter2("a"));
     assertEquals("1*2*3*a*b*c*4*5*6", sc.insertAsteriskBetweenEachCharacter2("123abc456"));
   }
+
+  @Test
+  public void testToHexadecimal()
+  {
+    ScreeningQuestions sc = new ScreeningQuestions();
+
+    assertEquals("0", sc.toHexadecimal(0));
+    assertEquals("2A8", sc.toHexadecimal(680));
+    assertEquals("ABCDEF", sc.toHexadecimal(11259375));
+    assertEquals("-ABCDEF", sc.toHexadecimal(-11259375));
+  }
+
+  @Test
+  public void testToBinary()
+  {
+    ScreeningQuestions sc = new ScreeningQuestions();
+
+    assertEquals("0", sc.toBinary(0));
+    assertEquals("10000", sc.toBinary(16));
+    assertEquals("1010101000", sc.toBinary(680));
+    assertEquals("-101010111100110111101111", sc.toBinary(-11259375));
+  }
 }

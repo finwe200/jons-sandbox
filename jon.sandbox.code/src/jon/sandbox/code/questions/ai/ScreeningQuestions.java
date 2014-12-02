@@ -1,5 +1,8 @@
 package jon.sandbox.code.questions.ai;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ScreeningQuestions
 {
   public int closestTo1000(int arg1, int arg2)
@@ -230,6 +233,41 @@ public class ScreeningQuestions
     return insertAsteriskBetweenEachCharacter2(str);
   }
 
+  public String toHexadecimal(int num)
+  {
+    return toOtherBase(16, num);
+  }
+
+  public String toBinary(int num)
+  {
+    return toOtherBase(2,  num);
+  }
+  
+  private String toOtherBase(int base, int num)
+  {
+    StringBuffer buf = new StringBuffer(m_digits.size());
+    if (num < 0)
+    {
+      buf.append('-');
+      num = Math.abs(num);
+    }
+
+    m_digits.clear(); 
+    int result = num;
+    do
+    {
+      int remainder = result % base;
+      m_digits.add(remainder);
+      result = result / base;
+    }
+    while (result != 0);
+
+    for (int i = m_digits.size() - 1; i >= 0; i--) {
+      buf.append(ms_hexChars[m_digits.get(i)]);
+    }
+    return buf.toString();
+  }
+
   public static void main(String[] args)
   {
     ScreeningQuestions sc = new ScreeningQuestions();
@@ -291,6 +329,18 @@ public class ScreeningQuestions
       "prefixEachCharacterInStringWithAsterisk2(\"\")=" + 
       sc.insertAsteriskBetweenEachCharacter2("")
     );
+
+    System.out.println("toHexadecimal(680)=" + sc.toHexadecimal(680));
+    System.out.println("toHexadecimal(0)=" + sc.toHexadecimal(0));
+    System.out.println("toHexadecimal(-11259375)=" + sc.toHexadecimal(-11259375));
+
+    System.out.println("toBinary(16)=" + sc.toBinary(16));
+    System.out.println("toBinary(0)=" + sc.toBinary(0));
+    System.out.println("toBinary(-511)=" + sc.toBinary(-511));
   }
 
+  private final static char[] ms_hexChars =
+    {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+
+  private final List<Integer> m_digits = new ArrayList<Integer>(10);
 }
