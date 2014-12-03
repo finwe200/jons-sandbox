@@ -268,4 +268,18 @@ public class TestScreeningQuestions
     assertEquals("1010101000", sc.toBinary(680));
     assertEquals("-101010111100110111101111", sc.toBinary(-11259375));
   }
+
+  @Test
+  public void testAddPositiveIntegers()
+  {
+    ScreeningQuestions sc = new ScreeningQuestions();
+
+    assertEquals("1075", sc.addPositiveIntegers("983", "92"));
+    assertEquals("158", sc.addPositiveIntegers("17", "141"));
+    assertEquals("3", sc.addPositiveIntegers("", "3"));
+    assertEquals("9", sc.addPositiveIntegers("9", ""));
+    assertEquals("", sc.addPositiveIntegers("", ""));
+    assertEquals("17248627346256351276398274297803", sc.addPositiveIntegers("17248627346256351276398274297482", "321"));
+  }
+
 }

@@ -268,6 +268,27 @@ public class ScreeningQuestions
     return buf.toString();
   }
 
+  public String addPositiveIntegers(String num1, String num2)
+  {
+    int n = Math.max(num1.length(), num2.length());
+    StringBuffer buf = new StringBuffer(n * 2);
+    int carry = 0;
+
+    for (int count = n, i1 = num1.length() - 1, i2 = num2.length() - 1; count > 0; count--, i1--, i2--)
+    {
+      int d1 = (i1 >= 0) ? Integer.parseInt("" + num1.charAt(i1)) : 0;
+      int d2 = (i2 >= 0) ? Integer.parseInt("" + num2.charAt(i2)) : 0;
+      int sum = d1 + d2 + carry;
+      carry = sum / 10;
+      sum = (sum < 10) ? sum : sum - 10;
+      buf.insert(0, sum);
+    }
+    if (carry > 0) {
+      buf.insert(0, '1');
+    }
+    return buf.toString();
+  }
+
   public static void main(String[] args)
   {
     ScreeningQuestions sc = new ScreeningQuestions();
@@ -337,6 +358,11 @@ public class ScreeningQuestions
     System.out.println("toBinary(16)=" + sc.toBinary(16));
     System.out.println("toBinary(0)=" + sc.toBinary(0));
     System.out.println("toBinary(-511)=" + sc.toBinary(-511));
+
+    System.out.println(
+      "addPositiveIntegers(\"983\", \"92\")=" + sc.addPositiveIntegers("983", "92"));
+    System.out.println(
+      "addPositiveIntegers(\"66\", \"85\")=" + sc.addPositiveIntegers("66", "85"));
   }
 
   private final static char[] ms_hexChars =
