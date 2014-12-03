@@ -276,8 +276,8 @@ public class ScreeningQuestions
 
     for (int count = n, i1 = num1.length() - 1, i2 = num2.length() - 1; count > 0; count--, i1--, i2--)
     {
-      int d1 = (i1 >= 0) ? Integer.parseInt("" + num1.charAt(i1)) : 0;
-      int d2 = (i2 >= 0) ? Integer.parseInt("" + num2.charAt(i2)) : 0;
+      int d1 = (i1 >= 0) ? num1.charAt(i1) - '0' : 0;
+      int d2 = (i2 >= 0) ? num2.charAt(i2)- '0' : 0;
       int sum = d1 + d2 + carry;
       carry = sum / 10;
       sum = (sum < 10) ? sum : sum - 10;
