@@ -16,7 +16,7 @@ public class ScreeningQuestions
       return "";
     }
 
-    StringBuffer buf = new StringBuffer(str.length() * 2);
+    StringBuilder buf = new StringBuilder(str.length() * 2);
     for (char c : str.toCharArray())
     {
       buf.append(c);
@@ -144,7 +144,7 @@ public class ScreeningQuestions
   @SuppressWarnings("unused")
   private String toString(int[] elements)
   {
-    StringBuffer buf = new StringBuffer(200);
+    StringBuilder buf = new StringBuilder(200);
     buf.append('[');
     for (int i = 0, n = elements.length; i < n; i++)
     {
@@ -195,12 +195,12 @@ public class ScreeningQuestions
     if (str == null) {
       return "";
     }
-    StringBuffer buf = new StringBuffer(str.length() * 2);
+    StringBuilder buf = new StringBuilder(str.length() * 2);
     return insertAsteriskBetweenEachCharacter(str, buf, 0).toString();
   }
 
-  private StringBuffer insertAsteriskBetweenEachCharacter(
-    String str, StringBuffer buf, int index)
+  private StringBuilder insertAsteriskBetweenEachCharacter(
+    String str, StringBuilder buf, int index)
   {
     int len = str.length();
     if (index >= len) {
@@ -245,7 +245,7 @@ public class ScreeningQuestions
   
   private String toOtherBase(int base, int num)
   {
-    StringBuffer buf = new StringBuffer(m_digits.size());
+    StringBuilder buf = new StringBuilder(m_digits.size());
     if (num < 0)
     {
       buf.append('-');
@@ -271,7 +271,7 @@ public class ScreeningQuestions
   public String addPositiveIntegers(String num1, String num2)
   {
     int n = Math.max(num1.length(), num2.length());
-    StringBuffer buf = new StringBuffer(n * 2);
+    StringBuilder buf = new StringBuilder(n * 2);
     int carry = 0;
 
     for (int count = n, i1 = num1.length() - 1, i2 = num2.length() - 1; count > 0; count--, i1--, i2--)

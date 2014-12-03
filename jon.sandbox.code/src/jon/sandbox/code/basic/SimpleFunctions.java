@@ -52,7 +52,7 @@ public class SimpleFunctions
   static public String invertWords(String input)
   {
     String[] words = input.split(" ");
-    StringBuffer buf = new StringBuffer(input.length());
+    StringBuilder buf = new StringBuilder(input.length());
 
     // Evaluate words in original order
     boolean firstWord = true;
