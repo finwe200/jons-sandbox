@@ -282,4 +282,13 @@ public class TestScreeningQuestions
     assertEquals("17248627346256351276398274297803", sc.addPositiveIntegers("17248627346256351276398274297482", "321"));
   }
 
+  @Test
+  public void testReverseWords()
+  {
+    ScreeningQuestions sc = new ScreeningQuestions();
+
+    assertEquals("words of list a is This", sc.reverseWords("This is a list of words"));
+    assertEquals("words", sc.reverseWords("words"));
+    assertEquals("", sc.reverseWords(""));
+  }
 }

@@ -289,6 +289,21 @@ public class ScreeningQuestions
     return buf.toString();
   }
 
+  // "This is a list of words" ==> "words of list a is This"
+  public String reverseWords(String words)
+  {
+    String[] listOfWords = words.split(" ");
+    StringBuilder buf = new StringBuilder(words.length());
+    for (int i = listOfWords.length - 1; i >= 0; i--)
+    {
+      if (buf.length() > 0) {
+        buf.append(' ');
+      }
+      buf.append(listOfWords[i]);
+    }
+    return buf.toString();
+  }
+
   public static void main(String[] args)
   {
     ScreeningQuestions sc = new ScreeningQuestions();
@@ -363,6 +378,9 @@ public class ScreeningQuestions
       "addPositiveIntegers(\"983\", \"92\")=" + sc.addPositiveIntegers("983", "92"));
     System.out.println(
       "addPositiveIntegers(\"66\", \"85\")=" + sc.addPositiveIntegers("66", "85"));
+
+    System.out.println(
+      "reverseWords(\"This is a list of words\"=" + sc.reverseWords("This is a list of words")); 
   }
 
   private final static char[] ms_hexChars =
