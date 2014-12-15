@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ui
+Bundle-SymbolicName: jon.sandbox.eclipse.common.ui
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: jon.sandbox.common.ui.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: jon.sandbox.common.ui,
+ jon.sandbox.common.ui.helper,
+ jon.sandbox.common.ui.viewer

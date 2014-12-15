@@ -10,7 +10,7 @@ public enum ModelProvider
   private ModelProvider()
   {
     m_persons = new ArrayList<Person>(5);
-    m_persons.add(new Person("Rainer", "Zufall", Gender.eMale, true, 20));
+    m_persons.add(new Person("Reiner", "Zufall", Gender.eMale, true, 20));
     m_persons.add(new Person("Reiner", "Babbel", Gender.eMale, true, 22));
     m_persons.add(new Person("Marie", "Dortmund", Gender.eFemale, false, 23));
     m_persons.add(new Person("Holger", "Adams", Gender.eMale, true, 24));

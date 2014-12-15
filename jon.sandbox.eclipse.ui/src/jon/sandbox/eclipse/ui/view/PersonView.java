@@ -1,34 +1,13 @@
 package jon.sandbox.eclipse.ui.view;
 
-import java.net.URL;
-
-import jon.sandbox.eclipse.ui.model.ModelProvider;
-import jon.sandbox.eclipse.ui.model.Person;
-import jon.sandbox.eclipse.ui.view.edit.FirstNameEditingSupport;
-import jon.sandbox.eclipse.ui.view.edit.GenderEditingSupport;
-import jon.sandbox.eclipse.ui.view.edit.IsMarriedEditingSupport;
-
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.CellLabelProvider;
-import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.eclipse.jface.viewers.EditingSupport;
 import org.eclipse.jface.viewers.TableViewer;
-import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
-import org.osgi.framework.Bundle;
-import org.osgi.framework.FrameworkUtil;
 
 public class PersonView
   extends
@@ -72,151 +51,13 @@ public class PersonView
   
   private void createViewer(Composite parent)
   {
-    m_viewer = new TableViewer(
+    m_viewer = new PersonViewer(
       parent,
       SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER
     );
 
-    // Create the various table columns
-    addColumn("First Name", 80, new FirstNameLabelProvider(), new FirstNameEditingSupport(m_viewer));
-    addColumn("Last Name", 120, new LastNameLabelProvider());
-    addColumn("Gender", 100, new GenderLabelProvider(), new GenderEditingSupport(m_viewer));
-    addColumn("Is Married", 80, new IsMarriedLabelProvider(), new IsMarriedEditingSupport(m_viewer));
-    addColumn("Age", 50, new AgeLabelProvider());
-
-    // Make lines and header visible
-    final Table table = m_viewer.getTable();
-    table.setHeaderVisible(true);
-    table.setLinesVisible(true);
-
-    // Set the content for the viewer, setInput will call getElements in the
-    // contentProvider
-    m_viewer.setContentProvider(new ArrayContentProvider());
-    m_viewer.setInput(ModelProvider.INSTANCE.getPersons());
-
-
     // Make the selection available to other views
     getSite().setSelectionProvider(m_viewer);
-  }
-
-  private TableViewerColumn addColumn(
-    String label, int width, CellLabelProvider labelProvider,
-    EditingSupport editingSupport, boolean isResizable, boolean isMovable)
-  {
-    TableViewerColumn viewerCol = new TableViewerColumn(m_viewer, SWT.NONE);
-
-    viewerCol.setLabelProvider(labelProvider);
-    viewerCol.setEditingSupport(editingSupport);
-
-    TableColumn col = viewerCol.getColumn();
-    col.setWidth(width);
-    col.setText(label);
-    col.setResizable(isResizable);
-    col.setMoveable(isMovable);
-
-    return viewerCol;
-  }
-
-  private TableViewerColumn addColumn(
-    String label, int width, CellLabelProvider labelProvider)
-  {
-    return addColumn(label, width, labelProvider, null, true, true);
-  }
-
-  private TableViewerColumn addColumn(
-    String label, int width, CellLabelProvider labelProvider,
-    EditingSupport editingSupport)
-  {
-    return addColumn(label, width, labelProvider, editingSupport, true, true);
-  }
-
-  // Helper method to load the images
-  // Ensure to dispose the images in your @PreDestroy method
-  private static Image getImage(String file)
-  {
-    // assume that the current class is called View.java
-    Bundle bundle = FrameworkUtil.getBundle(PersonView.class);
-    URL url = FileLocator.find(bundle, new Path("icons/" + file), null);
-    ImageDescriptor image = ImageDescriptor.createFromURL(url);
-    return image.createImage();
-  }
-
-  private class FirstNameLabelProvider extends ColumnLabelProvider
-  {
-    @Override
-    public String getText(Object element)
-    {
-      Person p = (Person)element;
-      return p.getFirstName();
-    }
-  }
-
-  private class LastNameLabelProvider extends ColumnLabelProvider
-  {
-    @Override
-    public String getText(Object element)
-    {
-      Person p = (Person)element;
-      return p.getLastName();
-    }
-  }
-
-  private class GenderLabelProvider extends ColumnLabelProvider
-  {
-    @Override
-    public String getText(Object element)
-    {
-      Person p = (Person)element;
-      return p.getGender().toString();
-    }
-  }
-
-  private class IsMarriedLabelProvider extends ColumnLabelProvider
-  {
-    public IsMarriedLabelProvider()
-    {
-      super();
-
-      //ms_checkedImage = Activator.getImageDescriptor("icons/checked.gif").createImage();
-      //ms_uncheckedImage = Activator.getImageDescriptor("icons/unchecked.gif").createImage();
-      ms_checkedImage = PersonView.getImage("checked.gif");
-      ms_uncheckedImage = PersonView.getImage("unchecked.gif");
-    }
-
-    @Override
-    public void dispose()
-    {
-      ms_checkedImage.dispose();
-      ms_uncheckedImage.dispose();
-
-      super.dispose();
-    }
-
-    @Override
-    public String getText(Object element)
-    {
-      Person p = (Person)element;
-      return "" + p.isMarried();
-    }
-
-    @Override
-    public Image getImage(Object element)
-    {
-      return (((Person)element).isMarried()) ? ms_checkedImage : ms_uncheckedImage;
-    }
-
-    private final Image ms_checkedImage;
-    private final Image ms_uncheckedImage;
-  }
-
-  private class AgeLabelProvider extends ColumnLabelProvider
-  {
-    @Override
-    public String getText(Object element)
-    {
-      Person p = (Person)element;
-      return "" + p.getAge();
-    }
   }
 
   private TableViewer m_viewer;

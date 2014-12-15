@@ -23,7 +23,7 @@
          point="org.eclipse.ui.views">
       <view
             name="View"
-            class="jon.sandbox.eclipse.ui.View"
+            class="jon.sandbox.eclipse.ui.view.PersonView"
             id="jon.sandbox.eclipse.ui.view">
       </view>
    </extension>
