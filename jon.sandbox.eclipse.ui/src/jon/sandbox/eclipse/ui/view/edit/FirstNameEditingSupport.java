@@ -1,0 +1,50 @@
+package jon.sandbox.eclipse.ui.view.edit;
+
+import jon.sandbox.eclipse.ui.model.Person;
+
+import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.EditingSupport;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TextCellEditor;
+
+public class FirstNameEditingSupport
+  extends
+    EditingSupport
+{
+
+  public FirstNameEditingSupport(TableViewer viewer)
+  {
+    super(viewer);
+
+    m_viewer = viewer;
+    m_editor = new TextCellEditor(viewer.getTable());
+  }
+
+  @Override
+  protected CellEditor getCellEditor(Object element)
+  {
+    return m_editor;
+  }
+
+  @Override
+  protected boolean canEdit(Object element)
+  {
+    return true;
+  }
+
+  @Override
+  protected Object getValue(Object element)
+  {
+    return ((Person)element).getFirstName();
+  }
+
+  @Override
+  protected void setValue(Object element, Object value)
+  {
+    ((Person)element).setFirstName(String.valueOf(value));
+    m_viewer.update(element, null);
+  }
+
+  private final TableViewer m_viewer;
+  private final CellEditor m_editor;
+}
