@@ -7,41 +7,39 @@ package jon.sandbox.common.ui.viewer;
 
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.swt.SWT;
 
 public abstract class CommonViewerSorter extends ViewerSorter
 {
   protected CommonViewerSorter()
   {
-    this(-1);
-  }
-
-  protected CommonViewerSorter(int column)
-  {
     super();
-    m_curColumn = column;
-    m_sortDirection = ms_ascendingSort;
+    m_curColumn = -1;
+    m_sortDirection = SWT.NONE;
   }
 
   /**
-    * Does the sort. If it's a different column from the previous sort, do an
-    * ascending sort. If it's the same column as the last sort, toggle the sort
-    * direction.
+    * Update the column to sort. If the specified column is different from the
+    * previously sorted column then do an ascending sort. Otherwise toggle the
+    * sort direction.
     * 
     * @param column
     */
-  public final void doSort(int column)
+  public final void updateSortColumn(int column)
   {
     if (column == m_curColumn)
     {
       // Same column as last sort; toggle the direction
-      m_sortDirection = !m_sortDirection;
+      m_sortDirection = (m_sortDirection == SWT.DOWN) ? SWT.UP : SWT.DOWN;
     }
     else
     {
       // New column; do an ascending sort
       m_curColumn = column;
-      m_sortDirection = ms_ascendingSort;
+      setSortColumn(column);
+      m_sortDirection = SWT.DOWN;
     }
+    setSortDirection(m_sortDirection);
   }
 
   @Override
@@ -50,8 +48,7 @@ public abstract class CommonViewerSorter extends ViewerSorter
     int rtn = doCompare(viewer, arg1, arg2); 
 
     // If descending order, flip the direction
-    if (m_sortDirection == ms_descendingSort)
-    {
+    if (m_sortDirection == SWT.UP) {
       rtn = -rtn;
     }
 
@@ -66,6 +63,18 @@ public abstract class CommonViewerSorter extends ViewerSorter
    * @return
    */
   protected abstract int doCompare(Viewer viewer, Object arg1, Object arg2); 
+
+  /* Inform the underlying viewer of the "sort column".
+   * 
+   * @param column The zero relative column index.
+   */
+  protected abstract void setSortColumn(int column);
+
+  /* Inform the underlying viewer of the "sort direction".
+   * 
+   * @param direction Can be SWT.UP or SWT.DOWN
+   */
+  protected abstract void setSortDirection(int direction);
 
   @SuppressWarnings("unchecked")
   protected final int compare(Object arg1, Object arg2)
@@ -91,9 +100,6 @@ public abstract class CommonViewerSorter extends ViewerSorter
     return result;
   }
 
-  protected static final boolean ms_ascendingSort = true;
-  protected static final boolean ms_descendingSort = false;
-
   protected int m_curColumn;
-  private boolean m_sortDirection;
+  protected int m_sortDirection;
 }

@@ -24,7 +24,7 @@ public class ViewerSortSelectionAdaptor extends SelectionAdapter
   @Override
   public void widgetSelected(SelectionEvent event)
   {
-    m_sorter.doSort(m_colIndex);
+    m_sorter.updateSortColumn(m_colIndex);
     m_viewer.refresh(true);
   }
 

@@ -2,7 +2,7 @@ package jon.sandbox.eclipse.ui.view;
 
 import jon.sandbox.common.ui.helper.CommonUIHelper;
 import jon.sandbox.common.ui.viewer.CommonTableViewer;
-import jon.sandbox.common.ui.viewer.CommonViewerSorter;
+import jon.sandbox.common.ui.viewer.TableViewerSorter;
 import jon.sandbox.common.ui.viewer.ViewerSortSelectionAdaptor;
 import jon.sandbox.eclipse.ui.model.ModelProvider;
 import jon.sandbox.eclipse.ui.model.Person;
@@ -34,13 +34,13 @@ public class PersonViewer
     // Perform common initialization
     super.init();
 
-    // Set the sorter for the table (initial sort will be by "first name")
+    // Set the sorter for the table
     PersonViewerSorter sorter = new PersonViewerSorter();
     setSorter(sorter);
 
     // Create/configure the various table columns for editing and sorting
     addColumn(
-      "First Name", 80, new FirstNameLabelProvider(),
+      "First Name", 90, new FirstNameLabelProvider(),
       new FirstNameEditingSupport(this),
       new ViewerSortSelectionAdaptor(this, sorter, ms_colIndexFirstName)
     );
@@ -64,6 +64,10 @@ public class PersonViewer
       new ViewerSortSelectionAdaptor(this, sorter, ms_colIndexAge)
     );
 
+    // Make the initial sort be by "first name" (must call this method after
+    // columns have been defined/added to the table viewer)
+    sorter.updateSortColumn(ms_colIndexFirstName);
+
     // Set the content for the viewer, setInput will call getElements in the
     // contentProvider
     setContentProvider(new ArrayContentProvider());
@@ -71,11 +75,11 @@ public class PersonViewer
   }
 
   private class PersonViewerSorter
-    extends CommonViewerSorter
+    extends TableViewerSorter
   {
     public PersonViewerSorter()
     {
-      super(ms_colIndexFirstName);
+      super(PersonViewer.this);
     }
   
     @Override
