@@ -6,9 +6,11 @@ import jon.sandbox.common.ui.viewer.CommonViewerSorter;
 import jon.sandbox.common.ui.viewer.ViewerSortSelectionAdaptor;
 import jon.sandbox.eclipse.ui.model.ModelProvider;
 import jon.sandbox.eclipse.ui.model.Person;
+import jon.sandbox.eclipse.ui.view.edit.AgeEditingSupport;
 import jon.sandbox.eclipse.ui.view.edit.FirstNameEditingSupport;
 import jon.sandbox.eclipse.ui.view.edit.GenderEditingSupport;
 import jon.sandbox.eclipse.ui.view.edit.IsMarriedEditingSupport;
+import jon.sandbox.eclipse.ui.view.edit.LastNameEditingSupport;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -32,17 +34,19 @@ public class PersonViewer
     // Perform common initialization
     super.init();
 
-    // Set the sorter for the table (Do an initial sort by "first name")
+    // Set the sorter for the table (initial sort will be by "first name")
     PersonViewerSorter sorter = new PersonViewerSorter();
     setSorter(sorter);
 
     // Create/configure the various table columns for editing and sorting
     addColumn(
-      "First Name", 80, new FirstNameLabelProvider(), new FirstNameEditingSupport(this),
+      "First Name", 80, new FirstNameLabelProvider(),
+      new FirstNameEditingSupport(this),
       new ViewerSortSelectionAdaptor(this, sorter, ms_colIndexFirstName)
     );
     addColumn(
       "Last Name", 120, new LastNameLabelProvider(),
+      new LastNameEditingSupport(this),
       new ViewerSortSelectionAdaptor(this, sorter, ms_colIndexLastName)
     );
     addColumn(
@@ -56,6 +60,7 @@ public class PersonViewer
     );
     addColumn(
       "Age", 50, new AgeLabelProvider(),
+      new AgeEditingSupport(this),
       new ViewerSortSelectionAdaptor(this, sorter, ms_colIndexAge)
     );
 

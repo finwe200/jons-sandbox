@@ -45,6 +45,6 @@ public class FirstNameEditingSupport
     m_viewer.update(element, null);
   }
 
-  private final TableViewer m_viewer;
-  private final CellEditor m_editor;
+  protected final TableViewer m_viewer;
+  protected final CellEditor m_editor;
 }
