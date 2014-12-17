@@ -1,4 +1,4 @@
-package jon.sandbox.code.questions.ns;
+package jon.sandbox.code.questions.group2;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

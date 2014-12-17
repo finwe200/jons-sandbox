@@ -1,4 +1,4 @@
-package jon.sandbox.code.questions.ns;
+package jon.sandbox.code.questions.group2;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

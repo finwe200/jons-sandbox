@@ -1,4 +1,4 @@
-package jon.sandbox.code.questions.ai;
+package jon.sandbox.code.questions.group1;
 
 import java.util.ArrayList;
 import java.util.List;
