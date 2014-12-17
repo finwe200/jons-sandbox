@@ -47,15 +47,17 @@ public class AgeEditingSupport
     try
     {
       int age = Integer.parseInt((String)value);
-      if (age >= 18 && age < 100)
+      if (Person.isValidAge(age))
       {
         ((Person)element).setAge(age);
+        m_viewer.update(element, null);
       }
       else
       {
         MessageDialog.openError(
           m_viewer.getTable().getShell(), "Invalid Age",
-          MessageFormat.format("The Age ({0}) must be >= 18 and <= 100!", age)
+          MessageFormat.format(
+            "The Age ({0}) must be >= {1} and <= {2}!", age, Person.MIN_AGE, Person.MAX_AGE)
         );
       }
     }

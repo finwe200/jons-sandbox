@@ -1,7 +1,10 @@
 package jon.sandbox.eclipse.ui.view;
 
-import org.eclipse.jface.viewers.TableViewer;
+import jon.sandbox.eclipse.ui.view.filter.PersonNameFilter;
+
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -14,8 +17,7 @@ public class PersonView
     ViewPart
 {
   public static final String ID = "jon.sandbox.eclipse.ui.view";
-  
-  
+
   /**
    * This is a callback that will allow us to create the viewer and initialize
    * it.
@@ -38,6 +40,21 @@ public class PersonView
     createViewer(parent);
     m_viewer.getControl().setLayoutData(
       new GridData(GridData.FILL, GridData.FILL, true, true, 2, 1));
+
+    // Listen to changes in the "search string" in order to "apply" the
+    // modified string to the Table Filter
+    final PersonNameFilter filter = m_viewer.getPersonNameFilter();
+    searchText.addKeyListener(
+      new KeyAdapter()
+      {
+        @Override
+        public void keyReleased(KeyEvent event)
+        {
+          filter.setSearchText(searchText.getText());
+          m_viewer.refresh();
+        }
+      }
+    );
   }
   
   /**
@@ -48,7 +65,7 @@ public class PersonView
   {
     m_viewer.getControl().setFocus();
   }
-  
+
   private void createViewer(Composite parent)
   {
     m_viewer = new PersonViewer(
@@ -60,5 +77,5 @@ public class PersonView
     getSite().setSelectionProvider(m_viewer);
   }
 
-  private TableViewer m_viewer;
+  private PersonViewer m_viewer;
 }

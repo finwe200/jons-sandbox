@@ -23,25 +23,6 @@ public class GenderEditingSupport
     m_viewer = viewer;
     m_editor = new ComboBoxViewerCellEditor(viewer.getTable());
     m_editor.setContenProvider(new ArrayContentProvider());
-//      new IStructuredContentProvider()
-//      {
-//        @Override
-//        public void inputChanged(Viewer viewer, Object oldInput, Object newInput)
-//        {
-//        }
-//        
-//        @Override
-//        public void dispose()
-//        {
-//        }
-//        
-//        @Override
-//        public Object[] getElements(Object inputElement)
-//        {
-//          return Gender.values();
-//        }
-//      }
-//    );
     m_editor.setLabelProvider(
       new LabelProvider()
       {

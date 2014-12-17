@@ -3,21 +3,26 @@ package jon.sandbox.eclipse.ui.model;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import org.eclipse.core.runtime.Assert;
+
 public class Person
 {
   public static final String PROPERTY_FIRST_NAME = "firstname";
   public static final String PROPERTY_LAST_NAME = "firstname";
   public static final String PROPERTY_GENDER = "gender";
   public static final String PROPERTY_IS_MARRIED = "married";
+  public static final int MIN_AGE = 18;
+  public static final int MAX_AGE = 100;
 
-//public Person()
-//{
-//}
-  
   public Person(
     String firstName, String lastName, Gender gender, boolean married, int age)
   {
     super();
+
+    Assert.isNotNull(firstName);
+    Assert.isNotNull(lastName);
+    Assert.isNotNull(gender);
+    Assert.isTrue(isValidAge(age));
 
     m_firstName = firstName;
     m_lastName = lastName;
@@ -97,6 +102,11 @@ public class Person
     return m_firstName + " " + m_lastName;
   }
  
+  static public boolean isValidAge(int age)
+  {
+    return (age >= MIN_AGE && age <= MAX_AGE);
+  }
+
   private String m_firstName;
   private String m_lastName;
   private boolean m_isMarried;

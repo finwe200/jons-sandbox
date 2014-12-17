@@ -11,6 +11,7 @@ import jon.sandbox.eclipse.ui.view.edit.FirstNameEditingSupport;
 import jon.sandbox.eclipse.ui.view.edit.GenderEditingSupport;
 import jon.sandbox.eclipse.ui.view.edit.IsMarriedEditingSupport;
 import jon.sandbox.eclipse.ui.view.edit.LastNameEditingSupport;
+import jon.sandbox.eclipse.ui.view.filter.PersonNameFilter;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -25,7 +26,14 @@ public class PersonViewer
   public PersonViewer(Composite parent, int style)
   {
     super(parent, style);
+ 
+    m_nameFilter = new PersonNameFilter();
     init();
+  }
+
+  public PersonNameFilter getPersonNameFilter()
+  {
+    return m_nameFilter;
   }
 
   @Override
@@ -37,6 +45,9 @@ public class PersonViewer
     // Set the sorter for the table
     PersonViewerSorter sorter = new PersonViewerSorter();
     setSorter(sorter);
+
+    // Set a first/last name Filter
+    addFilter(m_nameFilter);
 
     // Create/configure the various table columns for editing and sorting
     addColumn(
@@ -223,4 +234,6 @@ public class PersonViewer
   private static final int ms_colIndexGender = 2;
   private static final int ms_colIndexIsMarried = 3;
   private static final int ms_colIndexAge = 4;
+
+  final PersonNameFilter m_nameFilter;
 }
