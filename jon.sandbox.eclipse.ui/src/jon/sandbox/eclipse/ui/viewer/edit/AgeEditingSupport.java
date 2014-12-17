@@ -1,4 +1,4 @@
-package jon.sandbox.eclipse.ui.view.edit;
+package jon.sandbox.eclipse.ui.viewer.edit;
 
 import java.text.MessageFormat;
 

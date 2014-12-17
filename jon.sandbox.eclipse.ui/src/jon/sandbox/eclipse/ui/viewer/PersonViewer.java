@@ -1,21 +1,25 @@
-package jon.sandbox.eclipse.ui.view;
+package jon.sandbox.eclipse.ui.viewer;
 
 import jon.sandbox.common.ui.helper.CommonUIHelper;
 import jon.sandbox.common.ui.viewer.CommonTableViewer;
 import jon.sandbox.common.ui.viewer.TableViewerSorter;
 import jon.sandbox.common.ui.viewer.ViewerSortSelectionAdaptor;
+import jon.sandbox.eclipse.ui.helper.SearchHelper;
 import jon.sandbox.eclipse.ui.model.ModelProvider;
 import jon.sandbox.eclipse.ui.model.Person;
-import jon.sandbox.eclipse.ui.view.edit.AgeEditingSupport;
-import jon.sandbox.eclipse.ui.view.edit.FirstNameEditingSupport;
-import jon.sandbox.eclipse.ui.view.edit.GenderEditingSupport;
-import jon.sandbox.eclipse.ui.view.edit.IsMarriedEditingSupport;
-import jon.sandbox.eclipse.ui.view.edit.LastNameEditingSupport;
-import jon.sandbox.eclipse.ui.view.filter.PersonNameFilter;
+import jon.sandbox.eclipse.ui.viewer.edit.AgeEditingSupport;
+import jon.sandbox.eclipse.ui.viewer.edit.FirstNameEditingSupport;
+import jon.sandbox.eclipse.ui.viewer.edit.GenderEditingSupport;
+import jon.sandbox.eclipse.ui.viewer.edit.IsMarriedEditingSupport;
+import jon.sandbox.eclipse.ui.viewer.edit.LastNameEditingSupport;
+import jon.sandbox.eclipse.ui.viewer.filter.PersonNameFilter;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerCell;
+import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 
@@ -153,23 +157,43 @@ public class PersonViewer
     }
   }
   
-  private class FirstNameLabelProvider extends ColumnLabelProvider
+  private class FirstNameLabelProvider extends StyledCellLabelProvider
   {
     @Override
-    public String getText(Object element)
+    public void update(ViewerCell cell)
     {
-      Person p = (Person)element;
-      return p.getFirstName();
+      String searchText = m_nameFilter.getSearchText();
+      Person person = (Person) cell.getElement();
+      String cellText = person.getFirstName();
+      cell.setText(cellText);
+      
+      StyleRange[] ranges = SearchHelper.getSearchTermStyleRanges(searchText, cellText);
+      cell.setStyleRanges(ranges);
+
+      super.update(cell);
     }
   }
 
-  private class LastNameLabelProvider extends ColumnLabelProvider
+  private class LastNameLabelProvider extends StyledCellLabelProvider
   {
     @Override
-    public String getText(Object element)
+    public void update(ViewerCell cell)
     {
-      Person p = (Person)element;
-      return p.getLastName();
+      String searchText = m_nameFilter.getSearchText(); // searchText.getText();
+      Person person = (Person) cell.getElement();
+      String firstName = person.getFirstName();
+      String cellText = person.getLastName();
+      cell.setText(cellText);
+
+      // Only highlight the "search text" if it was NOT found in the "first name"
+      StyleRange[] ranges = null;
+      if (SearchHelper.getSearchTermOccurrences(searchText, firstName).length == 0)
+      {
+        ranges = SearchHelper.getSearchTermStyleRanges(searchText, cellText);
+      }
+      cell.setStyleRanges(ranges);
+
+      super.update(cell);
     }
   }
 

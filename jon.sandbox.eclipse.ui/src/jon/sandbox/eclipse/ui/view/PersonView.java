@@ -1,6 +1,7 @@
 package jon.sandbox.eclipse.ui.view;
 
-import jon.sandbox.eclipse.ui.view.filter.PersonNameFilter;
+import jon.sandbox.eclipse.ui.viewer.PersonViewer;
+import jon.sandbox.eclipse.ui.viewer.filter.PersonNameFilter;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyAdapter;

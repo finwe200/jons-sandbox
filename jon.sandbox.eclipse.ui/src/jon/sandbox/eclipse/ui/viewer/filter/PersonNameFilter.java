@@ -1,4 +1,4 @@
-package jon.sandbox.eclipse.ui.view.filter;
+package jon.sandbox.eclipse.ui.viewer.filter;
 
 import jon.sandbox.eclipse.ui.model.Person;
 
@@ -8,8 +8,14 @@ import org.eclipse.jface.viewers.ViewerFilter;
 public class PersonNameFilter
   extends ViewerFilter
 {
+  public String getSearchText()
+  {
+    return m_searchText;
+  }
+
   public void setSearchText(String s)
   {
+    m_searchText = s;
     // Ensure that the value can be used for matching 
     m_searchString = ".*" + s + ".*";
   }
@@ -25,5 +31,6 @@ public class PersonNameFilter
     return (p.getFirstName().matches(m_searchString) ||p.getLastName().matches(m_searchString));
   }
 
+  private String m_searchText;
   private String m_searchString;
 }
