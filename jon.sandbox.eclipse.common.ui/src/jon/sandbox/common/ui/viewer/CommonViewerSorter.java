@@ -14,7 +14,7 @@ public abstract class CommonViewerSorter extends ViewerSorter
   protected CommonViewerSorter()
   {
     super();
-    m_curColumn = -1;
+    m_curColIndex = -1;
     m_sortDirection = SWT.NONE;
   }
 
@@ -23,11 +23,11 @@ public abstract class CommonViewerSorter extends ViewerSorter
     * previously sorted column then do an ascending sort. Otherwise toggle the
     * sort direction.
     * 
-    * @param column
+    * @param columnIndex
     */
-  public final void updateSortColumn(int column)
+  public final void updateSortColumn(int columnIndex)
   {
-    if (column == m_curColumn)
+    if (columnIndex == m_curColIndex)
     {
       // Same column as last sort; toggle the direction
       m_sortDirection = (m_sortDirection == SWT.DOWN) ? SWT.UP : SWT.DOWN;
@@ -35,8 +35,8 @@ public abstract class CommonViewerSorter extends ViewerSorter
     else
     {
       // New column; do an ascending sort
-      m_curColumn = column;
-      setSortColumn(column);
+      m_curColIndex = columnIndex;
+      setSortColumn(columnIndex);
       m_sortDirection = SWT.DOWN;
     }
     setSortDirection(m_sortDirection);
@@ -68,7 +68,7 @@ public abstract class CommonViewerSorter extends ViewerSorter
    * 
    * @param column The zero relative column index.
    */
-  protected abstract void setSortColumn(int column);
+  protected abstract void setSortColumn(int columnIndex);
 
   /* Inform the underlying viewer of the "sort direction".
    * 
@@ -100,6 +100,6 @@ public abstract class CommonViewerSorter extends ViewerSorter
     return result;
   }
 
-  protected int m_curColumn;
+  protected int m_curColIndex;
   protected int m_sortDirection;
 }

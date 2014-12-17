@@ -46,10 +46,6 @@ public class PersonViewer
     // Perform common initialization
     super.init();
 
-    // Set the sorter for the table
-    PersonViewerSorter sorter = new PersonViewerSorter();
-    setSorter(sorter);
-
     // Set a first/last name Filter
     addFilter(m_nameFilter);
 
@@ -57,30 +53,33 @@ public class PersonViewer
     addColumn(
       "First Name", 90, new FirstNameLabelProvider(),
       new FirstNameEditingSupport(this),
-      new ViewerSortSelectionAdaptor(this, sorter, ms_colIndexFirstName)
+      new ViewerSortSelectionAdaptor(this, ms_colIndexFirstName)
     );
     addColumn(
       "Last Name", 120, new LastNameLabelProvider(),
       new LastNameEditingSupport(this),
-      new ViewerSortSelectionAdaptor(this, sorter, ms_colIndexLastName)
+      new ViewerSortSelectionAdaptor(this, ms_colIndexLastName)
     );
     addColumn(
       "Gender", 100, new GenderLabelProvider(), new GenderEditingSupport(this),
-      new ViewerSortSelectionAdaptor(this, sorter, ms_colIndexGender)
+      new ViewerSortSelectionAdaptor(this, ms_colIndexGender)
     );
     addColumn(
       "Is Married", 80, new IsMarriedLabelProvider(),
       new IsMarriedEditingSupport(this),
-      new ViewerSortSelectionAdaptor(this, sorter, ms_colIndexIsMarried)
+      new ViewerSortSelectionAdaptor(this, ms_colIndexIsMarried)
     );
     addColumn(
       "Age", 50, new AgeLabelProvider(),
       new AgeEditingSupport(this),
-      new ViewerSortSelectionAdaptor(this, sorter, ms_colIndexAge)
+      new ViewerSortSelectionAdaptor(this, ms_colIndexAge)
     );
 
-    // Make the initial sort be by "first name" (must call this method after
-    // columns have been defined/added to the table viewer)
+    // Set the sorter for the table and make the initial sort be by
+    // "first name" (must call this method after columns have been
+    // defined/added to the table viewer)
+    PersonViewerSorter sorter = new PersonViewerSorter();
+    setSorter(sorter);
     sorter.updateSortColumn(ms_colIndexFirstName);
 
     // Set the content for the viewer, setInput will call getElements in the
@@ -107,7 +106,7 @@ public class PersonViewer
         Person p2 = (Person)arg2;
   
         // Determine which column and do the appropriate sort
-        switch (m_curColumn)
+        switch (m_curColIndex)
         {
           case ms_colIndexFirstName:
             rtn = compare(p1.getFirstName(), p2.getFirstName());
@@ -127,30 +126,46 @@ public class PersonViewer
   
           case ms_colIndexGender:
             rtn = compare(p1.getGender().toString(), p2.getGender().toString());
-            if (rtn == 0) {
+            if (rtn == 0)
+            {
               // Do a secondary sort by "last name"
               rtn = compare(p1.getLastName(), p2.getLastName());
+              if (rtn == 0) {
+                // Do a third sort by "first name"
+                rtn = compare(p1.getFirstName(), p2.getFirstName());
+              }
             }
           break;
   
           case ms_colIndexIsMarried:
             rtn = compare((p1.isMarried()) ? 1 : 0, (p2.isMarried()) ? 1 : 0);
-            if (rtn == 0) {
+            if (rtn == 0)
+            {
               // Do a secondary sort by "last name"
               rtn = compare(p1.getLastName(), p2.getLastName());
+              if (rtn == 0) {
+                // Do a third sort by "first name"
+                rtn = compare(p1.getFirstName(), p2.getFirstName());
+              }
             }
           break;
   
           case ms_colIndexAge:
             rtn = compare(p1.getAge(), p2.getAge());
-            if (rtn == 0) {
+            if (rtn == 0)
+            {
               // Do a secondary sort by "last name"
               rtn = compare(p1.getLastName(), p2.getLastName());
+              if (rtn == 0) {
+                // Do a third sort by "first name"
+                rtn = compare(p1.getFirstName(), p2.getFirstName());
+              }
             }
           break;
         }
       }
-      catch (Throwable ex) {
+      catch (Throwable ex)
+      {
         rtn = 0;
       }
       return rtn;

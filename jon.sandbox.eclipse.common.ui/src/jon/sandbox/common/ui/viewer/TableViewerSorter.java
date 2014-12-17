@@ -21,11 +21,13 @@ public abstract class TableViewerSorter
   }
 
   @Override
-  protected final void setSortColumn(int column)
+  protected final void setSortColumn(int columnIndex)
   {
     Table table = m_tableViewer.getTable();
-    TableColumn col = table.getColumns()[m_curColumn];
-    table.setSortColumn(col);
+    TableColumn[] cols = table.getColumns();
+    if (columnIndex >= 0 && columnIndex < cols.length) {
+      table.setSortColumn(cols[m_curColIndex]);
+    }
   }
 
   @Override
