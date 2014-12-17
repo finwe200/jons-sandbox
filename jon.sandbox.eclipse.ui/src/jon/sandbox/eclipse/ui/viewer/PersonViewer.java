@@ -14,6 +14,7 @@ import jon.sandbox.eclipse.ui.viewer.edit.IsMarriedEditingSupport;
 import jon.sandbox.eclipse.ui.viewer.edit.LastNameEditingSupport;
 import jon.sandbox.eclipse.ui.viewer.filter.PersonNameFilter;
 
+import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.StyledCellLabelProvider;
@@ -86,8 +87,21 @@ public class PersonViewer
     // contentProvider
     setContentProvider(new ArrayContentProvider());
     setInput(ModelProvider.INSTANCE.getPersons());
+
+    // Create and set the "context menu" for the table
+    createSetContextMenu();
   }
 
+  @Override
+  protected void createActions()
+  {
+  }
+
+  @Override
+  protected void fillContextMenu(IMenuManager mgr)
+  {
+  }
+ 
   private class PersonViewerSorter
     extends TableViewerSorter
   {

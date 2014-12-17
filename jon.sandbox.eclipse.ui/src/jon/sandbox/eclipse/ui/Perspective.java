@@ -19,7 +19,7 @@ public class Perspective
   public void createInitialLayout(IPageLayout layout)
   {
     String editorAreaId = layout.getEditorArea();
-    layout.setEditorAreaVisible(false);
+    layout.setEditorAreaVisible(true);
     layout.setFixed(true);
       
     IFolderLayout folder = layout.createFolder(
