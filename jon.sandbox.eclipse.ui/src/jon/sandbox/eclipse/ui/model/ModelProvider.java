@@ -15,7 +15,7 @@ public enum ModelProvider
     m_persons.add(new Person("Marie", "Dortmund", Gender.eFemale, false, 23));
     m_persons.add(new Person("Holger", "Adams", Gender.eMale, true, 25));
     m_persons.add(new Person("Juliane", "Adams", Gender.eFemale, true, 25));
-    m_persons.add(new Person("Ziggg", "Stardust", Gender.eAndrogynous, false, 26));
+    m_persons.add(new Person("Ziggy", "Stardust", Gender.eAndrogynous, false, 26));
   }
 
   public List<Person> getPersons()
