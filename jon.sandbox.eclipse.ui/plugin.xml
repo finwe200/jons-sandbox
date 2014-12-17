@@ -22,9 +22,15 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            name="View"
+            name="Person"
             class="jon.sandbox.eclipse.ui.view.PersonView"
-            id="jon.sandbox.eclipse.ui.view">
+            id="jon.sandbox.eclipse.ui.view.person">
+      </view>
+      <view
+            class="jon.sandbox.eclipse.ui.view.VirtualView"
+            id="jon.sandbox.eclipse.ui.view.virtual"
+            name="Virtual"
+            restorable="true">
       </view>
    </extension>
    <extension

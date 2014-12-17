@@ -1,11 +1,6 @@
 package jon.sandbox.eclipse.ui.view;
 
-import jon.sandbox.eclipse.ui.viewer.PersonViewer;
-import jon.sandbox.eclipse.ui.viewer.filter.PersonNameFilter;
-
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.KeyAdapter;
-import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -13,11 +8,11 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
-public class PersonView
+public class VirtualView
   extends
     ViewPart
 {
-  public static final String ID = "jon.sandbox.eclipse.ui.view.person";
+  public static final String ID = "jon.sandbox.eclipse.ui.view.virtual";
 
   /**
    * This is a callback that will allow us to create the viewer and initialize
@@ -37,6 +32,7 @@ public class PersonView
     searchText.setLayoutData(
       new GridData(GridData.FILL, GridData.CENTER, true, false, 1, 1));
 
+    /*
     // Create the viewer
     createViewer(parent);
     m_viewer.getControl().setLayoutData(
@@ -56,6 +52,7 @@ public class PersonView
         }
       }
     );
+    */
   }
   
   /**
@@ -64,9 +61,10 @@ public class PersonView
   @Override
   public void setFocus()
   {
-    m_viewer.getControl().setFocus();
+//    m_viewer.getControl().setFocus();
   }
 
+  /*
   private void createViewer(Composite parent)
   {
     m_viewer = new PersonViewer(
@@ -77,6 +75,7 @@ public class PersonView
     // Make the selection available to other views
     getSite().setSelectionProvider(m_viewer);
   }
+  */
 
-  private PersonViewer m_viewer;
+//  private PersonViewer m_viewer;
 }
