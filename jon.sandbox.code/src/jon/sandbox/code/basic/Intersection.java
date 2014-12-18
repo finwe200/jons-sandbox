@@ -15,7 +15,7 @@ public class Intersection<T>
       map1.put(i, i);
     }
     
-    // Store only elements contain in both arrays (and filter out duplicates)
+    // Only store elements contained in both arrays (and filter out duplicates)
     HashMap<T, T> outputMap = new HashMap<T, T>(map1.size());
     for (T i : array2)
     {

@@ -126,19 +126,19 @@ public class TestSingleLinkedList
       ListNode<Integer> node4 = list.add(-672365);
       ListNode<Integer> node5 = list.add(42);
       ListNode<Integer> node6 = list.add(73);
-      assertEquals(null, list.tryToStartOfLoop());
+      assertEquals(null, list.tryToFindStartOfLoop());
 
       node6.m_next = node5;
-      assertEquals(node5, list.tryToStartOfLoop());
+      assertEquals(node5, list.tryToFindStartOfLoop());
       
       node4.m_next = node1;
-      assertEquals(node1, list.tryToStartOfLoop());
+      assertEquals(node1, list.tryToFindStartOfLoop());
 
       node3.m_next = node2;
-      assertEquals(node2, list.tryToStartOfLoop());
+      assertEquals(node2, list.tryToFindStartOfLoop());
 
       node1.m_next = node1;
-      assertEquals(node1, list.tryToStartOfLoop());    
+      assertEquals(node1, list.tryToFindStartOfLoop());    
     }
 
     {
@@ -150,19 +150,19 @@ public class TestSingleLinkedList
       ListNode<Fruit> node4 = list.add(new Fruit("Watermelon"));
       ListNode<Fruit> node5 = list.add(new Fruit("Grape"));
       ListNode<Fruit> node6 = list.add(new Fruit("Rasberry"));
-      assertEquals(null, list.tryToStartOfLoop());
+      assertEquals(null, list.tryToFindStartOfLoop());
 
       node6.m_next = node5;
-      assertEquals(node5, list.tryToStartOfLoop());
+      assertEquals(node5, list.tryToFindStartOfLoop());
       
       node4.m_next = node1;
-      assertEquals(node1, list.tryToStartOfLoop());
+      assertEquals(node1, list.tryToFindStartOfLoop());
 
       node3.m_next = node2;
-      assertEquals(node2, list.tryToStartOfLoop());
+      assertEquals(node2, list.tryToFindStartOfLoop());
 
       node1.m_next = node1;
-      assertEquals(node1, list.tryToStartOfLoop());    
+      assertEquals(node1, list.tryToFindStartOfLoop());    
     }
   }
 }

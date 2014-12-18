@@ -55,20 +55,17 @@ public class SimpleFunctions
     StringBuilder buf = new StringBuilder(input.length());
 
     // Evaluate words in original order
-    boolean firstWord = true;
     for (String word : words)
     {
-       if (!firstWord) {
-         buf.append(' ');
-       } else {
-         firstWord = false;
-       }
+      if (buf.length() > 0) {
+        buf.append(' ');
+      }
  
-       // Invert word
-       for (int i = word.length() - 1; i >= 0; i--)
-       {
-          buf.append(word.charAt(i));
-       }
+      // Invert word
+      for (int i = word.length() - 1; i >= 0; i--)
+      {
+        buf.append(word.charAt(i));
+      }
     } 
     return buf.toString();
   }

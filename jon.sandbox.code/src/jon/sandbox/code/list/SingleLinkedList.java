@@ -74,7 +74,7 @@ public class SingleLinkedList<T>
    * @return null if there is no loop otherwise return the node at the "start"
    *  of the loop.
    */
-  public ListNode<T> tryToStartOfLoop()
+  public ListNode<T> tryToFindStartOfLoop()
   {
     ListNode<T> trailer = m_root;
     ListNode<T> lead = advance(trailer, 1);
