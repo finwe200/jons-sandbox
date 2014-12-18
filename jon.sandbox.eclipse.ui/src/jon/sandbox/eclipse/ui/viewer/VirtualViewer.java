@@ -16,6 +16,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Tree;
 
 public class VirtualViewer
   extends CommonTreeViewer
@@ -31,6 +32,10 @@ public class VirtualViewer
   {
     // Perform common initialization
     super.init(parent);
+
+    // Turn off the header
+    Tree tree = getTree();
+    tree.setHeaderVisible(false);
 
     // Set a first/last name Filter
     //addFilter(m_nameFilter);
@@ -124,7 +129,7 @@ public class VirtualViewer
       super();
 
       m_authorImage = CommonUIHelper.getImage(VirtualViewer.class, "author.png");
-      m_bookImage = CommonUIHelper.getImage(VirtualViewer.class, "book.gif");
+      m_bookImage = CommonUIHelper.getImage(VirtualViewer.class, "book.png");
     }
 
     @Override
@@ -148,7 +153,7 @@ public class VirtualViewer
       if (element instanceof Author)
       {
         Author author = (Author)element;
-        return author.getLastName() + " " + author.getFirstName();
+        return author.getLastName() + ", " + author.getFirstName(); // author.toString()
       }
       return ((Book)element).getTitle();
     }
