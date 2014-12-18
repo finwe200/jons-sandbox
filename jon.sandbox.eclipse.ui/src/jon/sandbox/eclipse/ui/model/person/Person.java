@@ -1,4 +1,4 @@
-package jon.sandbox.eclipse.ui.model;
+package jon.sandbox.eclipse.ui.model.person;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -7,10 +7,10 @@ import org.eclipse.core.runtime.Assert;
 
 public class Person
 {
-  public static final String PROPERTY_FIRST_NAME = "firstname";
-  public static final String PROPERTY_LAST_NAME = "firstname";
-  public static final String PROPERTY_GENDER = "gender";
-  public static final String PROPERTY_IS_MARRIED = "married";
+  public static final String PROPERTY_FIRST_NAME = "person.firstname";
+  public static final String PROPERTY_LAST_NAME = "person.firstname";
+  public static final String PROPERTY_GENDER = "person.gender";
+  public static final String PROPERTY_IS_MARRIED = "person.married";
   public static final int MIN_AGE = 18;
   public static final int MAX_AGE = 100;
 
@@ -24,6 +24,7 @@ public class Person
     Assert.isNotNull(gender);
     Assert.isTrue(isValidAge(age));
 
+    m_propertyChangeSupport = new PropertyChangeSupport(this);
     m_firstName = firstName;
     m_lastName = lastName;
     m_gender = gender;
@@ -69,18 +70,21 @@ public class Person
 
   public void setFirstName(String firstName)
   {
+    Assert.isNotNull(firstName);
     m_propertyChangeSupport.firePropertyChange(
       PROPERTY_FIRST_NAME, m_firstName, m_firstName = firstName);
   }
 
   public void setLastName(String lastName)
   {
+    Assert.isNotNull(lastName);
     m_propertyChangeSupport.firePropertyChange(
       PROPERTY_LAST_NAME, m_lastName, m_lastName = lastName);
   }
 
   public void setGender(Gender gender)
   {
+    Assert.isNotNull(gender);
     m_propertyChangeSupport.firePropertyChange(
       PROPERTY_GENDER, m_gender, m_gender = gender);
   }
@@ -107,11 +111,10 @@ public class Person
     return (age >= MIN_AGE && age <= MAX_AGE);
   }
 
+  private final PropertyChangeSupport m_propertyChangeSupport;
   private String m_firstName;
   private String m_lastName;
   private boolean m_isMarried;
   private Gender m_gender;
   private int m_age;
-  private final PropertyChangeSupport m_propertyChangeSupport =
-    new PropertyChangeSupport(this);
 }

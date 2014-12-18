@@ -5,7 +5,6 @@
   */
 package jon.sandbox.common.ui.viewer;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -292,16 +291,21 @@ public abstract class CommonTableViewer
     boolean isResizable, boolean isMovable)
   {
     TableViewerColumn viewerCol = new TableViewerColumn(this, SWT.NONE);
-
-    viewerCol.setLabelProvider(labelProvider);
-    viewerCol.setEditingSupport(editingSupport);
+    if (labelProvider != null) {
+      viewerCol.setLabelProvider(labelProvider);
+    }
+    if (editingSupport != null) {
+      viewerCol.setEditingSupport(editingSupport);
+    }
 
     TableColumn col = viewerCol.getColumn();
     col.setWidth(width);
     col.setText(label);
     col.setResizable(isResizable);
     col.setMoveable(isMovable);
-    col.addSelectionListener(sortSelectionAdaptor);
+    if (sortSelectionAdaptor != null) {
+      col.addSelectionListener(sortSelectionAdaptor);
+    }
 
     return viewerCol;
   }
@@ -353,7 +357,7 @@ public abstract class CommonTableViewer
   }
 
   // Override this method for adding columns, etc.
-  protected void init()
+  protected void init(Composite parent)
   {
     // Make lines and header visible
     final Table table = getTable();

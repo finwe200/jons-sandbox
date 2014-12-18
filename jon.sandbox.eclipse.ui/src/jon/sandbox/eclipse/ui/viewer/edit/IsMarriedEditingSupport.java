@@ -1,6 +1,6 @@
 package jon.sandbox.eclipse.ui.viewer.edit;
 
-import jon.sandbox.eclipse.ui.model.Person;
+import jon.sandbox.eclipse.ui.model.person.Person;
 
 import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.CheckboxCellEditor;

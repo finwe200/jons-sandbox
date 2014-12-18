@@ -1,4 +1,4 @@
-package jon.sandbox.eclipse.ui.model;
+package jon.sandbox.eclipse.ui.model.person;
 
 import java.util.ArrayList;
 import java.util.List;

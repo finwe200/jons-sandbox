@@ -1,5 +1,7 @@
 package jon.sandbox.eclipse.ui.view;
 
+import jon.sandbox.eclipse.ui.viewer.VirtualViewer;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -32,12 +34,12 @@ public class VirtualView
     searchText.setLayoutData(
       new GridData(GridData.FILL, GridData.CENTER, true, false, 1, 1));
 
-    /*
     // Create the viewer
     createViewer(parent);
     m_viewer.getControl().setLayoutData(
       new GridData(GridData.FILL, GridData.FILL, true, true, 2, 1));
 
+    /*
     // Listen to changes in the "search string" in order to "apply" the
     // modified string to the Table Filter
     final PersonNameFilter filter = m_viewer.getPersonNameFilter();
@@ -61,13 +63,12 @@ public class VirtualView
   @Override
   public void setFocus()
   {
-//    m_viewer.getControl().setFocus();
+    m_viewer.getControl().setFocus();
   }
 
-  /*
   private void createViewer(Composite parent)
   {
-    m_viewer = new PersonViewer(
+    m_viewer = new VirtualViewer(
       parent,
       SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER
     );
@@ -75,7 +76,6 @@ public class VirtualView
     // Make the selection available to other views
     getSite().setSelectionProvider(m_viewer);
   }
-  */
 
-//  private PersonViewer m_viewer;
+  private VirtualViewer m_viewer;
 }

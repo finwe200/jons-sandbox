@@ -2,7 +2,7 @@ package jon.sandbox.eclipse.ui.viewer.edit;
 
 import java.text.MessageFormat;
 
-import jon.sandbox.eclipse.ui.model.Person;
+import jon.sandbox.eclipse.ui.model.person.Person;
 
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.CellEditor;

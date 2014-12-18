@@ -1,4 +1,4 @@
-package jon.sandbox.eclipse.ui.model;
+package jon.sandbox.eclipse.ui.model.person;
 
 public enum Gender
 {

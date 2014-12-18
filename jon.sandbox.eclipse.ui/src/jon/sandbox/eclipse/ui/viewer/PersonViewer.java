@@ -5,8 +5,8 @@ import jon.sandbox.common.ui.viewer.CommonTableViewer;
 import jon.sandbox.common.ui.viewer.TableViewerSorter;
 import jon.sandbox.common.ui.viewer.ViewerSortSelectionAdaptor;
 import jon.sandbox.eclipse.ui.helper.SearchHelper;
-import jon.sandbox.eclipse.ui.model.ModelProvider;
-import jon.sandbox.eclipse.ui.model.Person;
+import jon.sandbox.eclipse.ui.model.person.ModelProvider;
+import jon.sandbox.eclipse.ui.model.person.Person;
 import jon.sandbox.eclipse.ui.viewer.edit.AgeEditingSupport;
 import jon.sandbox.eclipse.ui.viewer.edit.FirstNameEditingSupport;
 import jon.sandbox.eclipse.ui.viewer.edit.GenderEditingSupport;
@@ -33,7 +33,7 @@ public class PersonViewer
     super(parent, style);
  
     m_nameFilter = new PersonNameFilter();
-    init();
+    init(parent);
   }
 
   public PersonNameFilter getPersonNameFilter()
@@ -42,10 +42,10 @@ public class PersonViewer
   }
 
   @Override
-  protected final void init()
+  protected final void init(Composite parent)
   {
     // Perform common initialization
-    super.init();
+    super.init(parent);
 
     // Set a first/last name Filter
     addFilter(m_nameFilter);
@@ -242,15 +242,15 @@ public class PersonViewer
     {
       super();
 
-      ms_checkedImage = CommonUIHelper.getImage(PersonViewer.class, "checked.gif");
-      ms_uncheckedImage = CommonUIHelper.getImage(PersonViewer.class, "unchecked.gif");
+      m_checkedImage = CommonUIHelper.getImage(PersonViewer.class, "checked.gif");
+      m_uncheckedImage = CommonUIHelper.getImage(PersonViewer.class, "unchecked.gif");
     }
 
     @Override
     public void dispose()
     {
-      CommonUIHelper.dispose(ms_checkedImage);
-      CommonUIHelper.dispose(ms_uncheckedImage);
+      CommonUIHelper.dispose(m_checkedImage);
+      CommonUIHelper.dispose(m_uncheckedImage);
 
       super.dispose();
     }
@@ -265,11 +265,11 @@ public class PersonViewer
     @Override
     public Image getImage(Object element)
     {
-      return (((Person)element).isMarried()) ? ms_checkedImage : ms_uncheckedImage;
+      return (((Person)element).isMarried()) ? m_checkedImage : m_uncheckedImage;
     }
 
-    private final Image ms_checkedImage;
-    private final Image ms_uncheckedImage;
+    private final Image m_checkedImage;
+    private final Image m_uncheckedImage;
   }
 
   private class AgeLabelProvider extends ColumnLabelProvider

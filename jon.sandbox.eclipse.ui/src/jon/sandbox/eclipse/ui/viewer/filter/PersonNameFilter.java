@@ -1,6 +1,6 @@
 package jon.sandbox.eclipse.ui.viewer.filter;
 
-import jon.sandbox.eclipse.ui.model.Person;
+import jon.sandbox.eclipse.ui.model.person.Person;
 
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;

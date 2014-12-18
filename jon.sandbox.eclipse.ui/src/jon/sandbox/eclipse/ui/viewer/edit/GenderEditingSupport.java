@@ -1,7 +1,7 @@
 package jon.sandbox.eclipse.ui.viewer.edit;
 
-import jon.sandbox.eclipse.ui.model.Gender;
-import jon.sandbox.eclipse.ui.model.Person;
+import jon.sandbox.eclipse.ui.model.person.Gender;
+import jon.sandbox.eclipse.ui.model.person.Person;
 
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellEditor;
