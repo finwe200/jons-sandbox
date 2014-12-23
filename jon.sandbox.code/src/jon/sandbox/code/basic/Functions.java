@@ -1,6 +1,9 @@
 package jon.sandbox.code.basic;
 
-public class SimpleFunctions
+import java.util.Iterator;
+import java.util.PriorityQueue;
+
+public class Functions
 {
   static public int fib1(int n)
   {
@@ -119,6 +122,69 @@ public class SimpleFunctions
     System.out.println("Inverted Words=" + new String(invertWordsInPlace(words.toCharArray())) + "\n");
   }
 
+  /**
+   * Find the specified number of largest integers in the specified array.
+   * This function will filter out duplicates!
+   * 
+   * @param numIntsToFind
+   * @param ints
+   * @return
+   */
+  public static int[] findLargestInts(int numIntsToFind, int[] ints)
+  {
+    if (numIntsToFind <= 0 || ints == null) {
+      return new int[0];
+    }
+
+    PriorityQueue<Integer> queue = new PriorityQueue<Integer>(numIntsToFind);
+    for (int e : ints)
+    {
+      if (queue.size() < numIntsToFind) {
+        queue.add(e);
+      }
+      else
+      {
+        Integer lowest = queue.peek(); // Peek returns the "lowest value"
+        if (e > lowest.intValue() && !queue.contains(e))
+        {
+          queue.remove(lowest);
+          queue.add(e);
+        }
+      }
+    }
+
+    int[] rtn = new int[queue.size()];
+    int i = 0;
+    for (Iterator<Integer> itr = queue.iterator(); itr.hasNext(); i++) {
+      rtn[i] = itr.next().intValue();
+    }
+    return rtn;
+  }
+
+  static private String toString(int[] ints)
+  {
+    StringBuilder buf = new StringBuilder(200);
+    buf.append('[');
+    for (int e : ints)
+    {
+      if (buf.length() > 1) {
+        buf.append(", ");
+      }
+      buf.append(e);
+    }
+    buf.append(']');
+    return buf.toString();
+  }
+
+  static private void outputLargestInts(int numIntsToFind, int[] ints)
+  {
+    int[] largestInts = findLargestInts(numIntsToFind, ints);
+    System.out.println("");
+    System.out.println("NumIntsToFind=" + numIntsToFind);
+    System.out.println("Ints[]=" + toString(ints));
+    System.out.println("LargestInts[]=" + toString(largestInts));
+  }
+
   public static void main(String[] args)
   {
     outputFib1(12);
@@ -131,5 +197,10 @@ public class SimpleFunctions
 
     outputInvertedWordsInPlace(" Hello  World ");
     outputInvertedWordsInPlace(" The time has come the walrus said \tto talk of many things ...  ");
+
+    outputLargestInts(0, new int[]{12, 2});
+    outputLargestInts(3, new int[]{12, 2});
+    outputLargestInts(3, new int[]{20, 18, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 4});
+    outputLargestInts(3, new int[]{20, 18, 1, 2, 3, 20, 5, 6, 7, 20, 9, 10, 20});
   }
 }
