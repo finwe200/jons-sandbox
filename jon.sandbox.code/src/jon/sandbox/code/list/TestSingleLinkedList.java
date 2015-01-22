@@ -48,6 +48,56 @@ public class TestSingleLinkedList
   }
 
   @Test
+  public void testFindIthNodeFromTail()
+  {
+    {
+      SingleLinkedList<Integer> list = new SingleLinkedList<Integer>();
+
+      ListNode<Integer> n10 = list.add(10);
+      assertEquals(n10, list.findIthNodeFromTail(0));
+      assertEquals(null, list.findIthNodeFromTail(1));
+      assertEquals(null, list.findIthNodeFromTail(2));
+      assertEquals(null, list.findIthNodeFromTail(100));
+
+      ListNode<Integer> n21 = list.add(21);
+      assertEquals(n21, list.findIthNodeFromTail(0));
+      assertEquals(n10, list.findIthNodeFromTail(1));
+      assertEquals(null, list.findIthNodeFromTail(2));
+      assertEquals(null, list.findIthNodeFromTail(100));
+
+      ListNode<Integer> n5 = list.add(5);
+      assertEquals(n5, list.findIthNodeFromTail(0));
+      assertEquals(n21, list.findIthNodeFromTail(1));
+      assertEquals(n10, list.findIthNodeFromTail(2));
+      assertEquals(null, list.findIthNodeFromTail(3));
+      assertEquals(null, list.findIthNodeFromTail(100));
+    }
+
+    {
+      SingleLinkedList<Fruit> list = new SingleLinkedList<Fruit>();
+
+      ListNode<Fruit> banana = list.add(new Fruit("Banana"));
+      assertEquals(banana, list.findIthNodeFromTail(0));
+      assertEquals(null, list.findIthNodeFromTail(1));
+      assertEquals(null, list.findIthNodeFromTail(2));
+      assertEquals(null, list.findIthNodeFromTail(100));
+
+      ListNode<Fruit> kiwi = list.add(new Fruit("Kiwi"));
+      assertEquals(kiwi, list.findIthNodeFromTail(0));
+      assertEquals(banana, list.findIthNodeFromTail(1));
+      assertEquals(null, list.findIthNodeFromTail(2));
+      assertEquals(null, list.findIthNodeFromTail(100));
+
+      ListNode<Fruit> apple = list.add(new Fruit("Apple"));
+      assertEquals(apple, list.findIthNodeFromTail(0));
+      assertEquals(kiwi, list.findIthNodeFromTail(1));
+      assertEquals(banana, list.findIthNodeFromTail(2));
+      assertEquals(null, list.findIthNodeFromTail(3));
+      assertEquals(null, list.findIthNodeFromTail(100));
+    }
+  }
+
+  @Test
   public void testAdd()
   {
     {

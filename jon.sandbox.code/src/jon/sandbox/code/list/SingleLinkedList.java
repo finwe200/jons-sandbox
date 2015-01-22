@@ -20,7 +20,7 @@ public class SingleLinkedList<T>
     }
     else
     {
-      ListNode<T> tail = findTail();
+      ListNode<T> tail = getTail();
       tail.m_next = newNode;
     }
     m_count++;
@@ -47,6 +47,30 @@ public class SingleLinkedList<T>
   public ListNode<T> getRoot()
   {
     return m_root;
+  }
+
+  public ListNode<T> getTail()
+  {
+    ListNode<T> tail = m_root;
+    for (; tail.m_next != null; tail = tail.m_next);
+    return tail;
+  }
+
+  /** Find the "ith" node from the end of the list.
+   * 
+   * @param i
+   * @return
+   */
+  public ListNode<T> findIthNodeFromTail(int i)
+  {
+    ListNode<T> rtnNode = m_root;
+    for (ListNode<T> curNode = m_root; curNode.m_next != null; curNode = curNode.m_next, i--)
+    {
+      if (i <= 0) {
+        rtnNode = rtnNode.m_next;
+      }
+    }
+    return (i > 0) ? null : rtnNode;
   }
 
   public int size()
@@ -106,13 +130,6 @@ public class SingleLinkedList<T>
     }
 
     return -1;
-  }
-
-  private ListNode<T> findTail()
-  {
-    ListNode<T> tail = m_root;
-    for (; tail.m_next != null; tail = tail.m_next);
-    return tail;
   }
 
   private ListNode<T> advance(ListNode<T> node, int count)
