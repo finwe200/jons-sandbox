@@ -37,20 +37,53 @@ public class ScreeningQuestions extends Object
     // Place numbers in sorted order
     Arrays.sort(ints);
 
-    for (int i = 0, n = ints.length; i < n; i++)
+    int halfTarget = (target + 1) / 2;
+    for (int i = 0, n = ints.length - 1; i < n; i++)
     {
       int cur = ints[i];
-      if (cur < 0 || cur > target)
+      if (cur < 0)
       {
-        // Bad input detected or it's no longer possible to find a sum
+        // Abort on bad input
+        throw new IllegalArgumentException(
+          "The array passed to containsSumOfTarget2() cannot contain a negative integer!"
+        );
+      }
+
+      if (cur > halfTarget)
+      {
+        // It's no longer possible to find a sum
         return false;
       }
 
       int index = Arrays.binarySearch(ints, target - cur);
-      if (index > 0)
+      if (index >= 0)
+      {
+        // Handle the case where the two numbers used to compute the "target"
+        // are the same (i.e. 0 + 0 = 0, 5 + 5 = 10, etc.)
+        if (index == i) {
+          if (!containsDuplicate(ints, index)) {
+            continue;
+          }
+        }
         return true;
+      }
     }
  
+    return false;
+  }
+
+  /*
+   * See if the sorted array contains a duplicate of the value that
+   * corresponds to the specified index.
+   */
+  private boolean containsDuplicate(int[] ints, int index)
+  {
+    if (index > 0) {
+      return (ints[index] == ints[index - 1]);
+    }
+    if (index + 1 < ints.length) {
+      return (ints[index] == ints[index + 1]);
+    }
     return false;
   }
 
@@ -62,25 +95,38 @@ public class ScreeningQuestions extends Object
    */
   public boolean containsSumOfTarget2(int[] ints, int target)
   {
-    // Place all numbers in a "hash map"
+    // Place all numbers in a "hash map. Use a "count" to handle the case
+    // where the two numbers used to compute the "target" are the same
+    // (i.e. 0 + 0 = 0, 5 + 5 = 10, etc.)
     HashMap<Integer, Integer> map = new HashMap<Integer, Integer>(ints.length); 
     for (int element : ints)
     {
       if (element < 0)
       {
         // Abort on bad input
-        return false;
+        throw new IllegalArgumentException(
+          "The array passed to containsSumOfTarget2() cannot contain a negative integer!"
+        );
       }
 
       // Filter out values that can never yield the target 
-      if (element <= target) {
-        map.put(element, element);
+      if (element <= target)
+      {
+        Integer count = map.get(element);
+        if (count == null) {
+          map.put(element, 1);
+        }
+        else {
+          map.put(element, count.intValue() + 1);
+        }
       }
     }
 
-    for (Integer key : map.keySet())
+    for (Integer lhs : map.keySet())
     {
-      if (map.containsKey(target - key)) {
+      int rhs = target - lhs;
+      Integer count = map.get(rhs);
+      if (count != null && (lhs.intValue() != rhs || count.intValue() >= 2)) {
         return true;
       }
     }
